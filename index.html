@@ -32,107 +32,107 @@
 
     /* ── Hero ───────────────────────────────────────── */
     #hero {
-      padding-bottom: 2.25rem;
+      padding-bottom: 1.75rem;
       margin-bottom: 0;
-      border-bottom: 1.5px solid #1c1c1c;
+      border-bottom: 1px solid #e2e2e2;
     }
     #hero h1 {
-      font-size: 1.75rem;
+      font-size: 1.6rem;
       font-weight: 400;
       letter-spacing: -0.025em;
       line-height: 1.15;
-      margin-bottom: 0.55rem;
+      margin-bottom: 0.45rem;
     }
     #hero .tagline {
-      font-size: 0.68rem;
+      font-size: 0.66rem;
       font-weight: 400;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: #888;
-      margin-bottom: 0.9rem;
+      letter-spacing: 0.11em;
+      color: #aaa;
+      margin-bottom: 0.7rem;
     }
     #hero .contact {
-      font-size: 0.78rem;
-      color: #999;
-      line-height: 1.8;
+      font-size: 0.76rem;
+      color: #aaa;
+      line-height: 1.75;
     }
-    #hero .contact a { color: #999; text-decoration: none; border-bottom: 1px solid #ddd; }
-    #hero .contact a:hover { color: #1c1c1c; border-color: #1c1c1c; }
+    #hero .contact a { color: #aaa; text-decoration: none; border-bottom: 1px solid #e0e0e0; }
+    #hero .contact a:hover { color: #555; border-color: #999; }
 
     /* ── Body content ───────────────────────────────── */
     #content { padding-top: 0; }
 
-    /* Part I / Part II — treat as section dividers */
+    /* Part I / Part II — section dividers */
     #content h1 {
-      font-size: 0.62rem;
+      font-size: 0.6rem;
       font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 0.13em;
-      color: #bbb;
-      margin: 2.75rem 0 1.5rem;
-      padding-top: 2.75rem;
-      border-top: 1px solid #ebebeb;
+      letter-spacing: 0.14em;
+      color: #ccc;
+      margin: 2.25rem 0 1.25rem;
+      padding-top: 2rem;
+      border-top: 1px solid #f0f0f0;
     }
     #content h1:first-child {
-      padding-top: 2.75rem;
+      padding-top: 1.75rem;
       border-top: none;
     }
 
     /* Job / Role entry header */
     #content h2 {
-      font-size: 0.9375rem;
+      font-size: 0.9rem;
       font-weight: 600;
       letter-spacing: -0.01em;
-      margin: 2rem 0 0.5rem;
+      margin: 1.85rem 0 0.4rem;
       display: flex;
       justify-content: space-between;
       align-items: baseline;
       gap: 1rem;
       flex-wrap: wrap;
     }
-    #content h2 .role { color: #1c1c1c; flex: 1; }
+    #content h2 .role { color: #222; flex: 1; }
     #content h2 .date {
-      font-size: 0.75rem;
-      font-weight: 400;
-      color: #aaa;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
-    /* Sub-project header */
-    #content h3 {
-      font-size: 0.8375rem;
-      font-weight: 600;
-      margin: 1.5rem 0 0.35rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-    }
-    #content h3 .proj-title { color: #333; flex: 1; }
-    #content h3 .proj-date {
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       font-weight: 400;
       color: #bbb;
       white-space: nowrap;
       flex-shrink: 0;
     }
 
-    /* h4 — rare, smaller than h3 */
-    #content h4 {
-      font-size: 0.8rem;
+    /* Sub-project header */
+    #content h3 {
+      font-size: 0.82rem;
       font-weight: 500;
-      color: #555;
-      margin: 1.1rem 0 0.3rem;
+      margin: 1.35rem 0 0.3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    #content h3 .proj-title { color: #444; flex: 1; }
+    #content h3 .proj-date {
+      font-size: 0.68rem;
+      font-weight: 400;
+      color: #c0c0c0;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* h4 */
+    #content h4 {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: #666;
+      margin: 1rem 0 0.25rem;
     }
 
     /* Paragraph */
     #content p {
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       color: #555;
-      margin-bottom: 0.5rem;
-      line-height: 1.75;
+      margin-bottom: 0.45rem;
+      line-height: 1.78;
     }
 
     /* Bold */
@@ -141,21 +141,22 @@
     /* Lists */
     #content ul {
       list-style: none;
-      margin: 0.35rem 0 0.85rem 0;
+      margin: 0.3rem 0 0.8rem 0;
     }
     #content li {
       position: relative;
-      font-size: 0.825rem;
-      color: #555;
-      line-height: 1.72;
+      font-size: 0.815rem;
+      color: #575757;
+      line-height: 1.75;
       padding-left: 1rem;
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.18rem;
     }
     #content li::before {
       content: '–';
       position: absolute;
       left: 0;
-      color: #ccc;
+      color: #d8d8d8;
+      font-weight: 300;
     }
     #content li strong { color: #1c1c1c; }
 
@@ -163,22 +164,23 @@
     #content table {
       width: 100%;
       border-collapse: collapse;
-      margin: 0.6rem 0 1rem;
-      font-size: 0.825rem;
+      margin: 0.5rem 0 0.9rem;
+      font-size: 0.815rem;
     }
     #content thead { display: none; }
     #content td {
-      padding: 0.4rem 1rem 0.4rem 0;
+      padding: 0.38rem 1rem 0.38rem 0;
       vertical-align: top;
-      border-bottom: 1px solid #f2f2f2;
-      color: #555;
+      border-bottom: 1px solid #f4f4f4;
+      color: #575757;
       line-height: 1.65;
     }
     #content td:first-child {
-      font-weight: 500;
-      color: #888;
+      font-weight: 400;
+      color: #999;
       white-space: nowrap;
       width: 1%;
+      padding-right: 1.5rem;
     }
     #content tr:last-child td { border-bottom: none; }
 
