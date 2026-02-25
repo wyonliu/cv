@@ -3,378 +3,313 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>刘怀洋 · Wyon Liu · CV</title>
+  <title>刘怀洋 Wyon Liu</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
   <style>
-    :root {
-      --text: #1a1a1a;
-      --text-muted: #555;
-      --text-light: #777;
-      --accent: #2563eb;
-      --border: #e5e7eb;
-      --bg: #fafafa;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { font-size: 16px; scroll-behavior: smooth; }
+    /* ─── Reset & Base ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 15px; scroll-behavior: smooth; }
     body {
-      font-family: 'Noto Sans SC', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      color: var(--text);
-      line-height: 1.65;
-      background: var(--bg);
+      font-family: 'Noto Sans SC', 'Inter', -apple-system, sans-serif;
+      background: #f7f7f5;
+      color: #1c1c1e;
       -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
     }
-    .container {
-      max-width: 720px;
+
+    /* ─── Layout ─────────────────────────────────────────────────── */
+    .page {
+      max-width: 780px;
       margin: 0 auto;
-      padding: 2.5rem 1.5rem;
+      background: #ffffff;
+      min-height: 100vh;
+      box-shadow: 0 0 0 1px rgba(0,0,0,.06), 0 4px 40px rgba(0,0,0,.06);
     }
-    @media (min-width: 768px) { .container { padding: 3.5rem 2rem; } }
 
-    /* Header */
-    header {
-      margin-bottom: 2.5rem;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid var(--border);
+    /* ─── Hero ───────────────────────────────────────────────────── */
+    .hero {
+      background: #0f0f0f;
+      padding: 3.25rem 3rem 2.75rem;
+      position: relative;
+      overflow: hidden;
     }
-    h1 {
-      font-size: 1.75rem;
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -60px; right: -80px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(37,99,235,.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero h1 {
+      font-size: 2.1rem;
       font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.35rem;
+      color: #fff;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 0.55rem;
     }
-    .tagline {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      font-weight: 500;
-      margin-bottom: 0.75rem;
-    }
-    .contact {
+    .hero .sub {
       font-size: 0.875rem;
-      color: var(--text-light);
-    }
-    .contact a { color: var(--accent); text-decoration: none; }
-    .contact a:hover { text-decoration: underline; }
-
-    /* Sections */
-    section { margin-bottom: 2.25rem; }
-    h2 {
-      font-size: 0.7rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-muted);
-      margin-bottom: 1.25rem;
-      padding-bottom: 0.35rem;
-    }
-    h3 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 0.6rem;
-    }
-    h4 {
-      font-size: 0.95rem;
-      font-weight: 600;
-      margin: 1.25rem 0 0.5rem;
-      color: var(--text);
-    }
-    p { margin-bottom: 0.75rem; }
-    ul { margin: 0.5rem 0 1rem 1.25rem; }
-    li { margin-bottom: 0.35rem; }
-    strong { font-weight: 600; }
-
-    /* Profile intro */
-    .intro {
-      font-size: 0.95rem;
-      color: var(--text);
+      color: rgba(255,255,255,.5);
+      font-weight: 400;
       margin-bottom: 1.5rem;
+      letter-spacing: 0.01em;
     }
-    .intro p { margin-bottom: 0.6rem; }
-
-    /* Stats table */
-    .stats {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.875rem;
-      margin-bottom: 1.5rem;
-    }
-    .stats td {
-      padding: 0.45rem 0.6rem 0.45rem 0;
-      vertical-align: top;
-      border-bottom: 1px solid rgba(0,0,0,0.04);
-    }
-    .stats td:first-child {
-      color: var(--text-muted);
-      font-weight: 500;
-      white-space: nowrap;
-      width: 1%;
-    }
-    .stats td:last-child { color: var(--text); }
-
-    /* Code block */
-    .code {
-      font-family: 'SF Mono', Monaco, monospace;
-      font-size: 0.8rem;
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 0.75rem 1rem;
-      margin: 1rem 0;
-      overflow-x: auto;
-    }
-
-    /* AIT table */
-    .ait-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-    .ait-table td {
-      padding: 0.5rem 0.75rem 0.5rem 0;
-      vertical-align: top;
-      border-bottom: 1px solid rgba(0,0,0,0.04);
-    }
-    .ait-table td:first-child {
-      font-weight: 600;
-      white-space: nowrap;
-      width: 1%;
-    }
-
-    /* Differentiators */
-    .diff-list { list-style: none; margin-left: 0; }
-    .diff-list li {
-      margin-bottom: 0.5rem;
-      padding-left: 0;
-    }
-    .diff-list li strong { color: var(--accent); }
-
-    /* Experience */
-    .exp-item { margin-bottom: 1.75rem; }
-    .exp-header {
+    .hero .contact {
       display: flex;
       flex-wrap: wrap;
-      align-items: baseline;
-      gap: 0.5rem;
-      margin-bottom: 0.5rem;
+      gap: 0.5rem 1.25rem;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,.45);
     }
-    .exp-title { font-weight: 600; font-size: 1rem; }
-    .exp-date { font-size: 0.8rem; color: var(--text-light); }
-    .exp-meta { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem; }
-    .exp-item ul { margin-left: 1.25rem; }
-    .exp-item li { font-size: 0.9rem; }
+    .hero .contact a { color: rgba(255,255,255,.55); text-decoration: none; }
+    .hero .contact a:hover { color: #fff; }
+    .contact-dot::before { content: '·'; margin-right: 1.25rem; }
 
-    /* Sub-projects */
-    .sub-project { margin-top: 1.25rem; }
-    .sub-project h4 { margin-top: 1rem; font-size: 0.9rem; }
-    .sub-project ul { margin-top: 0.4rem; }
+    /* ─── Body ───────────────────────────────────────────────────── */
+    #content {
+      padding: 2.75rem 3rem 4rem;
+    }
 
-    /* Footer */
-    footer {
+    /* ─── Markdown Rendering ─────────────────────────────────────── */
+    /* Hide h1 (we already have hero, and the first line of md is h1) */
+    #content > h1:first-child {
+      display: none;
+    }
+
+    /* Section headers (##) */
+    #content h2 {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #9ca3af;
+      margin: 2.75rem 0 1.25rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid #f0f0ed;
+    }
+    #content > h2:first-of-type { margin-top: 0; }
+
+    /* Sub-section (###) */
+    #content h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #111;
+      margin: 1.75rem 0 0.6rem;
+      letter-spacing: -0.01em;
+    }
+
+    /* Project/sub-role (####) */
+    #content h4 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #374151;
+      margin: 1.25rem 0 0.45rem;
+    }
+
+    /* Paragraphs */
+    #content p {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: #374151;
+      margin-bottom: 0.6rem;
+    }
+
+    /* Strong */
+    #content strong { color: #1c1c1e; font-weight: 600; }
+
+    /* Lists */
+    #content ul {
+      margin: 0.4rem 0 0.9rem 1.2rem;
+      list-style: none;
+    }
+    #content ul li {
+      position: relative;
+      font-size: 0.875rem;
+      color: #4b5563;
+      line-height: 1.7;
+      margin-bottom: 0.3rem;
+      padding-left: 0.1rem;
+    }
+    #content ul li::before {
+      content: '–';
+      position: absolute;
+      left: -1.1rem;
+      color: #d1d5db;
+      font-weight: 300;
+    }
+    #content ul li strong { color: #1c1c1e; }
+
+    /* Tables */
+    #content table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+      margin: 0.75rem 0 1.25rem;
+    }
+    #content table th {
+      display: none; /* hide empty headers */
+    }
+    #content table td {
+      padding: 0.45rem 0.75rem 0.45rem 0;
+      vertical-align: top;
+      border-bottom: 1px solid rgba(0,0,0,.045);
+      color: #374151;
+      line-height: 1.6;
+    }
+    #content table td:first-child {
+      color: #6b7280;
+      font-weight: 500;
+      white-space: nowrap;
+      width: 1%;
+      padding-right: 1.25rem;
+    }
+    #content table tr:last-child td { border-bottom: none; }
+
+    /* Code blocks (pre) */
+    #content pre {
+      background: #f5f5f3;
+      border: 1px solid #eaeae8;
+      border-radius: 5px;
+      padding: 0.9rem 1.1rem;
+      font-family: 'JetBrains Mono', 'SF Mono', monospace;
+      font-size: 0.775rem;
+      line-height: 1.7;
+      color: #374151;
+      overflow-x: auto;
+      margin: 0.75rem 0 1.25rem;
+    }
+    #content code {
+      font-family: 'JetBrains Mono', 'SF Mono', monospace;
+      font-size: 0.825em;
+      background: #f5f5f3;
+      padding: 0.15em 0.35em;
+      border-radius: 3px;
+      color: #374151;
+    }
+    #content pre code { background: none; padding: 0; font-size: 1em; }
+
+    /* Horizontal rule */
+    #content hr {
+      border: none;
+      border-top: 1px solid #f0f0ed;
+      margin: 2rem 0;
+    }
+
+    /* Blockquote */
+    #content blockquote {
+      border-left: 2px solid #e5e7eb;
+      padding-left: 1.1rem;
+      color: #6b7280;
+      font-size: 0.875rem;
+      margin: 0.75rem 0;
+    }
+
+    /* Footer timestamp */
+    #content > p:last-child {
+      font-size: 0.775rem;
+      color: #c0c0bc;
       margin-top: 2.5rem;
       padding-top: 1.5rem;
-      border-top: 1px solid var(--border);
-      font-size: 0.8rem;
-      color: var(--text-light);
+      border-top: 1px solid #f0f0ed;
     }
 
-    /* Print */
+    /* ─── Loading state ──────────────────────────────────────────── */
+    .loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+      color: #9ca3af;
+      font-size: 0.875rem;
+      gap: 0.5rem;
+    }
+    .loading-dot {
+      width: 5px; height: 5px;
+      background: #d1d5db;
+      border-radius: 50%;
+      animation: pulse 1.2s ease-in-out infinite;
+    }
+    .loading-dot:nth-child(2) { animation-delay: .2s; }
+    .loading-dot:nth-child(3) { animation-delay: .4s; }
+    @keyframes pulse {
+      0%, 80%, 100% { opacity: .2; transform: scale(.8); }
+      40% { opacity: 1; transform: scale(1); }
+    }
+
+    /* ─── Responsive ─────────────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .hero { padding: 2.5rem 1.5rem 2rem; }
+      .hero h1 { font-size: 1.7rem; }
+      #content { padding: 2rem 1.5rem 3rem; }
+    }
+
+    /* ─── Print ──────────────────────────────────────────────────── */
     @media print {
       body { background: #fff; }
-      .container { max-width: 100%; padding: 0; }
-      section { break-inside: avoid; }
-      a { color: inherit; }
+      .page { box-shadow: none; }
+      .hero { background: #1a1a1a; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      #content h2 { break-after: avoid; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
+  <div class="page">
+    <div class="hero">
       <h1>刘怀洋 Wyon Liu</h1>
-      <p class="tagline">Agentic Spatial Intelligence · 创业一号位 / 联合创始人</p>
-      <p class="contact">
-        +86-138-118-20678 · <a href="mailto:wyonliu@gmail.com">wyonliu@gmail.com</a> · 微信 wyonwyon<br>
-        北京 | 上海 | 香港 | 海外 · 北京海淀户籍 · 朝阳凤凰人才 · 香港高才
-      </p>
-    </header>
-
-    <section>
-      <h2>Part I · Profile</h2>
-      <div class="intro">
-        <p>北京大学计算机本硕（保送），计算机视觉 / 3D 重建方向，国际顶会论文。15 年产业经历覆盖 AI Agent 进入物理世界的全链路：底层算法 → 亿级并发架构 → 空间智能平台 → AI 硬件量产 → 多 Agent 系统 → 商业闭环。</p>
-        <p>创立空间智能公司，融资近亿元，搭建百人 AI × MR 全栈团队，8 年完成从 0 → 上市公司收购的创业全周期。此后主导贝壳空间智能底座建设，管理近百人产研团队。</p>
+      <p class="sub">Agentic Spatial Intelligence · 创业一号位 / 联合创始人</p>
+      <div class="contact">
+        <span>+86-138-118-20678</span>
+        <span><a href="mailto:wyonliu@gmail.com">wyonliu@gmail.com</a></span>
+        <span>微信 wyonwyon</span>
+        <span>北京 | 上海 | 香港 | 海外</span>
+        <span>北京海淀户籍 · 朝阳凤凰人才 · 香港高才</span>
       </div>
+    </div>
 
-      <h3>关键数据</h3>
-      <table class="stats">
-        <tr><td>空间数据</td><td>10 亿+㎡（全球最大规模消费级空间地图之一）</td></tr>
-        <tr><td>视频数据</td><td>100 万+小时</td></tr>
-        <tr><td>开发者</td><td>5 万+（中美日韩多国）</td></tr>
-        <tr><td>全球客户</td><td>500+（任天堂 / 索尼 / KDDI / 保时捷 / 华为 / 腾讯 / 百度）</td></tr>
-        <tr><td>Agent 并发</td><td>10 万+用户同时在线（城市级多 Agent 系统）</td></tr>
-        <tr><td>商业平台</td><td>100 万+人并发 MMO</td></tr>
-        <tr><td>收入</td><td>千万级（ToB + ToC）</td></tr>
-        <tr><td>技术指标</td><td>10+项世界领先</td></tr>
-        <tr><td>硬件</td><td>两代 AI 眼镜自主研发量产，CES AR 眼镜之星</td></tr>
-        <tr><td>荣誉</td><td>国务院五部委先锋案例 / 国高新 / 专精特新 / 数十项全球技术竞赛冠军</td></tr>
-      </table>
-
-      <h3>核心能力</h3>
-      <pre class="code">TCPMF 全链路：Technology → Cognition → Product → Market → Finance（完整走过两遍）</pre>
-
-      <table class="ait-table">
-        <tr><td>A · Architecture</td><td>以终为始的业务 × 技术 × 产品闭环架构。空间智能底座 → Agent 引擎 → 硬件量产 → 商业化全链路</td></tr>
-        <tr><td>I · Insight</td><td>2016 年判断"AI 必须进入物理世界"，比行业早 8 年。提出「AI 硬件四象限」框架</td></tr>
-        <tr><td>T · Transcendence</td><td>多次至暗时刻穿越 8 年创业周期。融资近亿 / 百人团队 / 被上市公司收购</td></tr>
-      </table>
-
-      <h3>差异化</h3>
-      <ul class="diff-list">
-        <li><strong>Agentic Native</strong> — 早于 Stanford Generative Agents，在真实景区部署城市级多智能体系统</li>
-        <li><strong>空间智能 × 世界模型</strong> — 10 亿㎡空间数据 + 全链路感知→理解→推理→生成系统</li>
-        <li><strong>AI 硬件全栈</strong> — 芯片选型→光学设计→算法优化→量产管控→场景落地的完整闭环</li>
-        <li><strong>创业一号位</strong> — 融资 / 组队 / 研发 / 增长 / 收购退出，全生命周期实战</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Part II · 详细履历</h2>
-
-      <div class="exp-item">
-        <div class="exp-header">
-          <span class="exp-title">贝壳找房 · XYZ 创新中心负责人</span>
-          <span class="exp-date">2024.11 – 2026.02</span>
-        </div>
-        <p class="exp-meta">上市公司创新业务一号位，近百人产研团队，含多名大厂 P9 级多模态大模型专家。</p>
-        <p><strong>BASIC 空间智能底座</strong></p>
-        <ul>
-          <li>Sida（真实世界→数字世界）：自研全链路管线，消费级设备采集→高质量几何重建→照片级 3DGS，多项 SOTA</li>
-          <li>Mira（数字世界→真实世界）：多端 3DGS + Mesh 混合渲染引擎，M2 芯片极限优化；2D 户型→3DGS→语义参数化→精装资产→智能组装→云烘焙→一键换装全链路</li>
-        </ul>
-        <p><strong>OmniAgent 空间智能体引擎</strong></p>
-        <ul>
-          <li>多模态空间 Agent：自然语言 + 空间感知 + 3D 交互融合，支撑 Agent 讲房、个性化推荐、空间问答</li>
-        </ul>
-        <p><strong>Agentic 第二曲线战略</strong></p>
-        <ul>
-          <li>LiveIn3D：3D 智能社区社交，Agent 驱动的邻里关系重建 + 高频居住服务入口</li>
-          <li>DreamHome：线下 MR 沉浸体验中心，居住领域"4S 体验店"，新流量源头</li>
-        </ul>
+    <div id="content">
+      <div class="loading">
+        <div class="loading-dot"></div>
+        <div class="loading-dot"></div>
+        <div class="loading-dot"></div>
       </div>
-
-      <div class="exp-item">
-        <div class="exp-header">
-          <span class="exp-title">悉见科技 · 创始人兼 CEO</span>
-          <span class="exp-date">2016.03 – 2024.06</span>
-        </div>
-        <p class="exp-meta">中国最早的 Agentic Spatial Intelligence 创业公司。融资近亿元，百人 AI × MR 全栈团队（谷歌 / 微软 / 腾讯 / 百度 / Momenta 资深专家），从底层算法到硬件量产到多 Agent 系统到商业变现的完整闭环。国高新 / 专精特新 / 数十项知识产权 / 数十项全球及全国技术比赛冠军。</p>
-
-        <div class="sub-project">
-          <h4>Artown.ai · 文旅 AI 智能体小镇 | 2023-2024</h4>
-          <p>全球首个城市级多 Agent 系统实地部署。</p>
-          <ul>
-            <li>全场景扫描 + AI 三维风格化重建 + AI 剧本构建，AR 版 Generative Agents 小镇</li>
-            <li>1:1 虚实映射景区级部署，<strong>10 万+用户同时在线</strong>，AR 现场 + VR 远程互通</li>
-            <li>数十名 AI Agents NPC 自主行为与多轮会话，大模型调用 / 长短期记忆 / 知识库访问全栈优化</li>
-            <li>服务故宫、大运河、颐和园、少林寺等国家级场景</li>
-            <li><strong>国务院五部委先锋案例</strong> · 北京市科委重点项目 · 市政府 & 文旅局官网推介</li>
-          </ul>
-        </div>
-
-        <div class="sub-project">
-          <h4>Arto.world · 多模态空间计算平台 | 2019-2024</h4>
-          <p>国内最先推出的消费级视觉推理空间智能地图平台。</p>
-          <ul>
-            <li>深度学习 AI 流水线 + 多模态视觉感知 + 超大规模三维重建 + 异构并行计算 + 全球自适应部署</li>
-            <li>5 万+开发者、众包采集 <strong>10 亿+㎡</strong>、100 万+ AR 用户</li>
-            <li><strong>10+核心技术指标世界领先</strong>，服务 KDDI / 任天堂 / 索尼 / Singtel / 保时捷 / 华为 / 腾讯 / 百度，<strong>千万级收入</strong></li>
-            <li>定位：物理世界感知-理解-推理中间件——Agent 进入真实世界的操作系统</li>
-          </ul>
-        </div>
-
-        <div class="sub-project">
-          <h4>C37.ai · 3D AIGC 工作室 | 2022-2024</h4>
-          <ul>
-            <li>多模态大模型 / 视频时空压缩 / DiT / 大模型微调与强化训练 / 游戏架构 / 生成式美术</li>
-            <li>工程化落地 SfM / NeRF / 3DGS / 2DGS 前沿三维重建技术</li>
-            <li><strong>全球首个城市街道级 3D AIGC + MR 裸眼全息沉浸产品「保时捷·奇幻梦之旅」</strong>，落地上海外滩与广州塔</li>
-          </ul>
-        </div>
-
-        <div class="sub-project">
-          <h4>X1 Pro / XMAN 系列 AI 眼镜 | 2016-2019</h4>
-          <p>自主研发并量产两代 AI 智能眼镜。</p>
-          <ul>
-            <li>芯片选型→光学设计→算法优化→量产管控→场景落地，XR + AI 软硬件全栈</li>
-            <li><strong>CES AR 眼镜之星</strong>，落地文旅 / 安防 / 巡检 / 物流，获公安部等资质认证</li>
-            <li>服务京东、大金、戴姆勒等</li>
-            <li>提出「AI 硬件四象限」框架：（算力：端侧 / 云端）×（交互：主动 / 被动），指导硬件产品定义</li>
-          </ul>
-        </div>
-
-        <div class="sub-project">
-          <h4>Seek App + MallRush 商业平台 | 2017-2023</h4>
-          <p>Agent 驱动的虚实共生社交与商业闭环。</p>
-          <ul>
-            <li>MR 城市探索社交：AR CityWalk / 找搭子 / AIGC 创作 / AI 导游</li>
-            <li>AI × AR 营销游戏 MallRush：<strong>100 万+人并发 MMO</strong>，服务大悦城 / 万象城 / 天河城 / 万达 / 绿地</li>
-            <li>为企业客户搭建垂直大模型与多智能体协作平台，接通智能体客服和企业知识库，<strong>千万级 ToB 收入</strong></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="exp-item">
-        <div class="exp-header">
-          <span class="exp-title">小米科技 · 云架构师</span>
-          <span class="exp-date">2013.04 – 2015.05</span>
-        </div>
-        <ul>
-          <li>MiPush：从 0→1 做成集团并发量第一的平台级云产品，<strong>亿级长连接消息推送</strong></li>
-          <li>MAMPA 框架：小米异步消息高并发处理框架，服务米推 / 米聊 / 米云 / 米信等核心业务</li>
-          <li>设计海量在线集群管理系统，改造 Redis / Kafka / ZK 等组件，编写 JerryMice 自动化部署平台</li>
-        </ul>
-      </div>
-
-      <div class="exp-item">
-        <div class="exp-header">
-          <span class="exp-title">网易有道 · 产研 Lead</span>
-          <span class="exp-date">2010.10 – 2013.04</span>
-        </div>
-        <ul>
-          <li>网易八方：中国最早 LBS 图片社交产品，系统架构与研发负责人</li>
-          <li>个性化推荐系统：协同过滤 / 图结构 / 深度学习 / 实时会话多路融合</li>
-          <li>一周完成 20+种图像滤镜算法并开源，成为多款 APP 算法来源</li>
-          <li>多模态图像产品"拍图识菜"</li>
-          <li><strong>绩效 Top 10%</strong></li>
-        </ul>
-      </div>
-
-      <div class="exp-item">
-        <div class="exp-header">
-          <span class="exp-title">送姜科技 · 联合创始人兼 CTO</span>
-          <span class="exp-date">2015.05 – 2015.12</span>
-        </div>
-        <p>清华 xLab 孵化，获天使轮及 A 轮投资，上线"校园版大众点评"。</p>
-      </div>
-
-      <div class="exp-item">
-        <h3>教育</h3>
-        <table class="stats" style="margin-top: 0.5rem;">
-          <tr><td>硕士（保送）</td><td>北京大学 · 计算机视觉 / 多模态 / 3D 重建 · 2008 – 2011</td></tr>
-          <tr><td>学士（统招）</td><td>北京大学 · 计算机科学与技术 · 2004 – 2008</td></tr>
-        </table>
-        <ul>
-          <li>GPU+CPU 异构架构三维重建加速，关键算法优化数万倍，<strong>国际顶会论文</strong></li>
-          <li>本科用 OpenGL 裸写游戏渲染引擎，编写《开源游戏编程指南引擎篇》，数千高阶读者</li>
-          <li>多项国家科学基金项目技术突破</li>
-          <li>自愿放弃博士，选择产业</li>
-          <li>斯坦福大学 / 香港科技大学 / 特拉维夫大学研学交流学者</li>
-        </ul>
-      </div>
-    </section>
-
-    <section>
-      <h2>目标</h2>
-      <p>Agentic AI 创业一号位 / 联合创始人。方向：物理世界 × AI Agent 的平台级机会。</p>
-    </section>
-
-    <footer>2026.02</footer>
+    </div>
   </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked@9/marked.min.js"></script>
+  <script>
+    marked.setOptions({
+      breaks: true,
+      gfm: true,
+    });
+
+    fetch('cv.md')
+      .then(r => {
+        if (!r.ok) throw new Error('Failed to load cv.md');
+        return r.text();
+      })
+      .then(text => {
+        // Strip the first H1 line (duplicates the hero) and contact block lines
+        const lines = text.split('\n');
+        let bodyStart = 0;
+        for (let i = 0; i < lines.length; i++) {
+          if (lines[i].startsWith('---') && i > 0) {
+            bodyStart = i + 1;
+            break;
+          }
+        }
+        const body = lines.slice(bodyStart).join('\n');
+        document.getElementById('content').innerHTML = marked.parse(body);
+      })
+      .catch(err => {
+        document.getElementById('content').innerHTML =
+          `<p style="color:#ef4444;font-size:.875rem">加载失败：${err.message}</p>`;
+      });
+  </script>
 </body>
 </html>
