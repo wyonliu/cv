@@ -3,312 +3,302 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>刘怀洋 Wyon Liu</title>
+  <title>Wyon Liu · CV</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <style>
-    /* ─── Reset & Base ──────────────────────────────────────────── */
+    /* ── Reset ─────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { font-size: 15px; scroll-behavior: smooth; }
+    html { font-size: 16px; }
     body {
       font-family: 'Noto Sans SC', 'Inter', -apple-system, sans-serif;
-      background: #f7f7f5;
-      color: #1c1c1e;
+      background: #fff;
+      color: #1c1c1c;
+      line-height: 1.7;
       -webkit-font-smoothing: antialiased;
-      min-height: 100vh;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* ─── Layout ─────────────────────────────────────────────────── */
+    /* ── Page ───────────────────────────────────────── */
     .page {
-      max-width: 780px;
+      max-width: 700px;
       margin: 0 auto;
-      background: #ffffff;
-      min-height: 100vh;
-      box-shadow: 0 0 0 1px rgba(0,0,0,.06), 0 4px 40px rgba(0,0,0,.06);
+      padding: 3.5rem 2.5rem 5rem;
+    }
+    @media (max-width: 600px) {
+      .page { padding: 2.5rem 1.5rem 4rem; }
     }
 
-    /* ─── Hero ───────────────────────────────────────────────────── */
-    .hero {
-      background: #0f0f0f;
-      padding: 3.25rem 3rem 2.75rem;
-      position: relative;
-      overflow: hidden;
+    /* ── Hero ───────────────────────────────────────── */
+    #hero {
+      padding-bottom: 2.25rem;
+      margin-bottom: 0;
+      border-bottom: 1.5px solid #1c1c1c;
     }
-    .hero::after {
-      content: '';
-      position: absolute;
-      top: -60px; right: -80px;
-      width: 320px; height: 320px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(37,99,235,.18) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero h1 {
-      font-size: 2.1rem;
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: -0.03em;
-      line-height: 1.1;
+    #hero h1 {
+      font-size: 1.75rem;
+      font-weight: 400;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
       margin-bottom: 0.55rem;
     }
-    .hero .sub {
-      font-size: 0.875rem;
-      color: rgba(255,255,255,.5);
+    #hero .tagline {
+      font-size: 0.68rem;
       font-weight: 400;
-      margin-bottom: 1.5rem;
-      letter-spacing: 0.01em;
-    }
-    .hero .contact {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem 1.25rem;
-      font-size: 0.8rem;
-      color: rgba(255,255,255,.45);
-    }
-    .hero .contact a { color: rgba(255,255,255,.55); text-decoration: none; }
-    .hero .contact a:hover { color: #fff; }
-    .contact-dot::before { content: '·'; margin-right: 1.25rem; }
-
-    /* ─── Body ───────────────────────────────────────────────────── */
-    #content {
-      padding: 2.75rem 3rem 4rem;
-    }
-
-    /* ─── Markdown Rendering ─────────────────────────────────────── */
-    /* Hide h1 (we already have hero, and the first line of md is h1) */
-    #content > h1:first-child {
-      display: none;
-    }
-
-    /* Section headers (##) */
-    #content h2 {
-      font-size: 0.65rem;
-      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: #9ca3af;
-      margin: 2.75rem 0 1.25rem;
-      padding-bottom: 0.6rem;
-      border-bottom: 1px solid #f0f0ed;
+      letter-spacing: 0.1em;
+      color: #888;
+      margin-bottom: 0.9rem;
     }
-    #content > h2:first-of-type { margin-top: 0; }
+    #hero .contact {
+      font-size: 0.78rem;
+      color: #999;
+      line-height: 1.8;
+    }
+    #hero .contact a { color: #999; text-decoration: none; border-bottom: 1px solid #ddd; }
+    #hero .contact a:hover { color: #1c1c1c; border-color: #1c1c1c; }
 
-    /* Sub-section (###) */
-    #content h3 {
-      font-size: 1.05rem;
+    /* ── Body content ───────────────────────────────── */
+    #content { padding-top: 0; }
+
+    /* Part I / Part II — treat as section dividers */
+    #content h1 {
+      font-size: 0.62rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      color: #bbb;
+      margin: 2.75rem 0 1.5rem;
+      padding-top: 2.75rem;
+      border-top: 1px solid #ebebeb;
+    }
+    #content h1:first-child {
+      padding-top: 2.75rem;
+      border-top: none;
+    }
+
+    /* Job / Role entry header */
+    #content h2 {
+      font-size: 0.9375rem;
       font-weight: 600;
-      color: #111;
-      margin: 1.75rem 0 0.6rem;
       letter-spacing: -0.01em;
+      margin: 2rem 0 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    #content h2 .role { color: #1c1c1c; flex: 1; }
+    #content h2 .date {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: #aaa;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
-    /* Project/sub-role (####) */
-    #content h4 {
-      font-size: 0.9rem;
+    /* Sub-project header */
+    #content h3 {
+      font-size: 0.8375rem;
       font-weight: 600;
-      color: #374151;
-      margin: 1.25rem 0 0.45rem;
+      margin: 1.5rem 0 0.35rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    #content h3 .proj-title { color: #333; flex: 1; }
+    #content h3 .proj-date {
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: #bbb;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
-    /* Paragraphs */
+    /* h4 — rare, smaller than h3 */
+    #content h4 {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #555;
+      margin: 1.1rem 0 0.3rem;
+    }
+
+    /* Paragraph */
     #content p {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
+      color: #555;
+      margin-bottom: 0.5rem;
       line-height: 1.75;
-      color: #374151;
-      margin-bottom: 0.6rem;
     }
 
-    /* Strong */
-    #content strong { color: #1c1c1e; font-weight: 600; }
+    /* Bold */
+    #content strong { color: #1c1c1c; font-weight: 600; }
 
     /* Lists */
     #content ul {
-      margin: 0.4rem 0 0.9rem 1.2rem;
       list-style: none;
+      margin: 0.35rem 0 0.85rem 0;
     }
-    #content ul li {
+    #content li {
       position: relative;
-      font-size: 0.875rem;
-      color: #4b5563;
-      line-height: 1.7;
-      margin-bottom: 0.3rem;
-      padding-left: 0.1rem;
+      font-size: 0.825rem;
+      color: #555;
+      line-height: 1.72;
+      padding-left: 1rem;
+      margin-bottom: 0.2rem;
     }
-    #content ul li::before {
+    #content li::before {
       content: '–';
       position: absolute;
-      left: -1.1rem;
-      color: #d1d5db;
-      font-weight: 300;
+      left: 0;
+      color: #ccc;
     }
-    #content ul li strong { color: #1c1c1e; }
+    #content li strong { color: #1c1c1c; }
 
     /* Tables */
     #content table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.86rem;
-      margin: 0.75rem 0 1.25rem;
+      margin: 0.6rem 0 1rem;
+      font-size: 0.825rem;
     }
-    #content table th {
-      display: none; /* hide empty headers */
-    }
-    #content table td {
-      padding: 0.45rem 0.75rem 0.45rem 0;
+    #content thead { display: none; }
+    #content td {
+      padding: 0.4rem 1rem 0.4rem 0;
       vertical-align: top;
-      border-bottom: 1px solid rgba(0,0,0,.045);
-      color: #374151;
-      line-height: 1.6;
+      border-bottom: 1px solid #f2f2f2;
+      color: #555;
+      line-height: 1.65;
     }
-    #content table td:first-child {
-      color: #6b7280;
+    #content td:first-child {
       font-weight: 500;
+      color: #888;
       white-space: nowrap;
       width: 1%;
-      padding-right: 1.25rem;
     }
-    #content table tr:last-child td { border-bottom: none; }
+    #content tr:last-child td { border-bottom: none; }
 
-    /* Code blocks (pre) */
+    /* Code blocks */
     #content pre {
-      background: #f5f5f3;
-      border: 1px solid #eaeae8;
-      border-radius: 5px;
-      padding: 0.9rem 1.1rem;
       font-family: 'JetBrains Mono', 'SF Mono', monospace;
-      font-size: 0.775rem;
-      line-height: 1.7;
-      color: #374151;
+      font-size: 0.76rem;
+      background: #f8f8f7;
+      border: 1px solid #eeeeed;
+      border-radius: 4px;
+      padding: 0.85rem 1rem;
       overflow-x: auto;
-      margin: 0.75rem 0 1.25rem;
+      line-height: 1.65;
+      color: #444;
+      margin: 0.6rem 0 1rem;
     }
     #content code {
       font-family: 'JetBrains Mono', 'SF Mono', monospace;
-      font-size: 0.825em;
-      background: #f5f5f3;
-      padding: 0.15em 0.35em;
+      font-size: 0.82em;
+      background: #f3f3f2;
+      padding: 0.1em 0.3em;
       border-radius: 3px;
-      color: #374151;
+      color: #444;
     }
-    #content pre code { background: none; padding: 0; font-size: 1em; }
+    #content pre code { background: none; padding: 0; }
 
     /* Horizontal rule */
-    #content hr {
-      border: none;
-      border-top: 1px solid #f0f0ed;
-      margin: 2rem 0;
-    }
+    #content hr { display: none; }
 
-    /* Blockquote */
-    #content blockquote {
-      border-left: 2px solid #e5e7eb;
-      padding-left: 1.1rem;
-      color: #6b7280;
-      font-size: 0.875rem;
-      margin: 0.75rem 0;
+    /* Italic (timestamp at end) */
+    #content em {
+      font-size: 0.75rem;
+      color: #ccc;
+      font-style: normal;
     }
-
-    /* Footer timestamp */
-    #content > p:last-child {
-      font-size: 0.775rem;
-      color: #c0c0bc;
+    #content p:has(> em:only-child) {
       margin-top: 2.5rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid #f0f0ed;
+      padding-top: 1.75rem;
+      border-top: 1px solid #f0f0ee;
     }
 
-    /* ─── Loading state ──────────────────────────────────────────── */
+    /* ── Loading ─────────────────────────────────────── */
     .loading {
       display: flex;
+      gap: 5px;
       align-items: center;
-      justify-content: center;
-      min-height: 200px;
-      color: #9ca3af;
-      font-size: 0.875rem;
-      gap: 0.5rem;
+      padding: 3rem 0;
     }
-    .loading-dot {
-      width: 5px; height: 5px;
-      background: #d1d5db;
+    .dot {
+      width: 4px; height: 4px;
+      background: #ddd;
       border-radius: 50%;
-      animation: pulse 1.2s ease-in-out infinite;
+      animation: blink 1.2s ease-in-out infinite;
     }
-    .loading-dot:nth-child(2) { animation-delay: .2s; }
-    .loading-dot:nth-child(3) { animation-delay: .4s; }
-    @keyframes pulse {
-      0%, 80%, 100% { opacity: .2; transform: scale(.8); }
-      40% { opacity: 1; transform: scale(1); }
-    }
-
-    /* ─── Responsive ─────────────────────────────────────────────── */
-    @media (max-width: 640px) {
-      .hero { padding: 2.5rem 1.5rem 2rem; }
-      .hero h1 { font-size: 1.7rem; }
-      #content { padding: 2rem 1.5rem 3rem; }
+    .dot:nth-child(2) { animation-delay: .2s; }
+    .dot:nth-child(3) { animation-delay: .4s; }
+    @keyframes blink {
+      0%, 100% { opacity: .2; } 50% { opacity: 1; }
     }
 
-    /* ─── Print ──────────────────────────────────────────────────── */
+    /* ── Print ──────────────────────────────────────── */
     @media print {
-      body { background: #fff; }
-      .page { box-shadow: none; }
-      .hero { background: #1a1a1a; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      #content h2 { break-after: avoid; }
+      .page { padding: 0; max-width: 100%; }
+      #content h1 { border-top-color: #ccc !important; }
     }
   </style>
 </head>
 <body>
   <div class="page">
-    <div class="hero">
-      <h1>刘怀洋 Wyon Liu</h1>
-      <p class="sub">Agentic Spatial Intelligence · 创业一号位 / 联合创始人</p>
-      <div class="contact">
-        <span>+86-138-118-20678</span>
-        <span><a href="mailto:wyonliu@gmail.com">wyonliu@gmail.com</a></span>
-        <span>微信 wyonwyon</span>
-        <span>北京 | 上海 | 香港 | 海外</span>
-        <span>北京海淀户籍 · 朝阳凤凰人才 · 香港高才</span>
-      </div>
-    </div>
-
-    <div id="content">
-      <div class="loading">
-        <div class="loading-dot"></div>
-        <div class="loading-dot"></div>
-        <div class="loading-dot"></div>
-      </div>
-    </div>
+    <header id="hero"><div class="loading"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></header>
+    <main id="content"></main>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/marked@9/marked.min.js"></script>
   <script>
-    marked.setOptions({
-      breaks: true,
-      gfm: true,
-    });
+    marked.setOptions({ breaks: false, gfm: true });
 
-    fetch('cv.md')
-      .then(r => {
-        if (!r.ok) throw new Error('Failed to load cv.md');
-        return r.text();
-      })
-      .then(text => {
-        // Strip the first H1 line (duplicates the hero) and contact block lines
-        const lines = text.split('\n');
-        let bodyStart = 0;
-        for (let i = 0; i < lines.length; i++) {
-          if (lines[i].startsWith('---') && i > 0) {
-            bodyStart = i + 1;
-            break;
-          }
-        }
-        const body = lines.slice(bodyStart).join('\n');
+    fetch('cv.md?' + Date.now())
+      .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
+      .then(md => {
+        const lines = md.split('\n');
+
+        // Split header block (before first ---) from body
+        const hrIdx = lines.findIndex(l => l.trim() === '---');
+        const header = lines.slice(0, hrIdx > -1 ? hrIdx : 8);
+        const body   = lines.slice(hrIdx > -1 ? hrIdx + 1 : 8).join('\n');
+
+        // Parse hero fields
+        const name    = (header.find(l => l.startsWith('# ')) || '').slice(2).trim();
+        const tagline = (header.find(l => l.startsWith('**')) || '').replace(/\*\*/g, '').trim();
+        const contact = header
+          .filter(l => l.trim() && !l.startsWith('#') && !l.startsWith('**') && !l.startsWith('-'))
+          .join('<br>')
+          .replace(/([\w.+%-]+@[\w.-]+\.\w+)/g, '<a href="mailto:$1">$1</a>');
+
+        document.querySelector('title').textContent = name + ' · CV';
+        document.getElementById('hero').innerHTML = `
+          <h1>${name}</h1>
+          ${tagline ? `<p class="tagline">${tagline}</p>` : ''}
+          ${contact ? `<p class="contact">${contact}</p>` : ''}
+        `;
+
+        // Render body markdown
         document.getElementById('content').innerHTML = marked.parse(body);
+
+        // Post-process: split "Role | Date" in h2 and h3
+        document.querySelectorAll('#content h2, #content h3').forEach(el => {
+          const txt = el.textContent;
+          const sep = txt.lastIndexOf(' | ');
+          if (sep === -1) return;
+          const role = txt.slice(0, sep);
+          const date = txt.slice(sep + 3);
+          const isH2 = el.tagName === 'H2';
+          el.innerHTML = isH2
+            ? `<span class="role">${role}</span><span class="date">${date}</span>`
+            : `<span class="proj-title">${role}</span><span class="proj-date">${date}</span>`;
+        });
       })
-      .catch(err => {
-        document.getElementById('content').innerHTML =
-          `<p style="color:#ef4444;font-size:.875rem">加载失败：${err.message}</p>`;
+      .catch(e => {
+        document.getElementById('hero').innerHTML = `<p style="color:#e00;font-size:.8rem">cv.md 加载失败：${e.message}</p>`;
       });
   </script>
 </body>
