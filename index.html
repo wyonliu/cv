@@ -243,8 +243,32 @@
 
     /* ── Print ──────────────────────────────────────── */
     @media print {
-      .page { padding: 0; max-width: 100%; }
-      #content h1 { border-top-color: #ccc !important; }
+      @page { size: A4; margin: 1.1cm 1.6cm; }
+      html { font-size: 12px; }
+      body { background: #fff; }
+      .page { max-width: 100%; padding: 0; }
+
+      #hero { padding-bottom: 0.7rem; border-bottom-width: 1px; }
+      #hero h1 { font-size: 1.4rem; margin-bottom: 0.25rem; }
+      #hero .tagline { margin-bottom: 0.35rem; }
+      #hero .contact a { border: none; }
+
+      #content h1 { margin: 0.75rem 0 0.5rem; padding-top: 0.7rem; }
+      #content h1:first-child { padding-top: 0.6rem; }
+      #content h2 { margin: 0.8rem 0 0.2rem; }
+      #content h3 { margin: 0.55rem 0 0.15rem; }
+      #content h4 { margin: 0.45rem 0 0.1rem; }
+      #content p { margin-bottom: 0.2rem; line-height: 1.6; }
+      #content ul { margin: 0.15rem 0 0.35rem; }
+      #content li { margin-bottom: 0.07rem; line-height: 1.6; }
+      #content table { margin: 0.25rem 0 0.45rem; }
+      #content td { padding: 0.22rem 0.75rem 0.22rem 0; line-height: 1.55; }
+      #content pre { padding: 0.4rem 0.65rem; margin: 0.25rem 0 0.45rem; font-size: 0.72rem; }
+      #content p:has(> em:only-child) { margin-top: 0.6rem; padding-top: 0.6rem; }
+
+      h2, h3 { break-after: avoid; }
+      li, tr { break-inside: avoid; }
+      a { color: inherit !important; text-decoration: none !important; border: none !important; }
     }
   </style>
 </head>
