@@ -272,7 +272,14 @@ body {font-family:'Noto Sans SC','PingFang SC','Hiragino Sans GB',-apple-system,
 #hero .tagline {font-size:.9rem;color:#333;text-transform:none;letter-spacing:0;font-weight:600;margin:.5rem 0;}
 #hero .contact {color:#777;font-size:.78rem;}
 #hero .contact a {color:#666;}
-#hero {padding-bottom:1.1rem;}
+#hero {position:relative;padding-bottom:1.1rem;}
+#hero h1 {padding-right:9rem;}
+.download-pdf {position:absolute;right:0;top:.28rem;display:inline-flex;align-items:center;gap:.45rem;min-height:36px;padding:.42rem .72rem;border:1px solid #dce2e6;border-radius:5px;background:#fafbfc;color:#4b5b67;font-size:.74rem;font-weight:600;line-height:1.3;text-decoration:none;transition:background .15s,border-color .15s;}
+.download-pdf:hover {background:#eef2f5;border-color:#9daeb9;}
+.download-pdf:focus-visible {outline:2px solid #59758a;outline-offset:3px;}
+.download-pdf svg {width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;}
+@media(max-width:600px){#hero h1{padding-right:0;}#hero{padding-top:2.7rem;}#hero .download-pdf{top:0;min-height:32px;font-size:.71rem;padding:.35rem .6rem;}}
+
 .navigation {display:flex;gap:.5rem 1.3rem;flex-wrap:wrap;padding:.85rem 0 .1rem;font-size:.74rem;}
 .navigation a {color:#555;font-weight:600;text-decoration:none;line-height:1.8;}
 .navigation a:hover,.navigation a:focus-visible {color:#111;text-decoration:underline;text-underline-offset:4px;}
@@ -382,9 +389,9 @@ body {font-family:'Noto Sans SC','PingFang SC','Hiragino Sans GB',-apple-system,
  html{font-size:13.3333px;}
  body{font-family:'Hiragino Sans GB','PingFang SC','Microsoft YaHei',sans-serif;color:#35404a;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
  .page{max-width:none;width:100%;padding:0;margin:0;}
- .navigation{display:none!important;}
+ .navigation,.download-pdf{display:none!important;}
  #hero{padding:0 0 6pt;border-bottom:1px solid #d9dfe3;}
- #hero h1{font-family:'Hiragino Sans GB',Arial,sans-serif;font-size:18pt;font-weight:500;line-height:1.3;margin:0 0 5pt;}
+ #hero h1{padding-right:0;font-family:'Hiragino Sans GB',Arial,sans-serif;font-size:18pt;font-weight:500;line-height:1.3;margin:0 0 5pt;}
  #hero .tagline{font-size:9.6pt;font-weight:500;margin:0 0 4pt;}
  #hero .contact{font-size:8pt;line-height:1.55;color:#75808a;}
  #hero .contact a{color:inherit;border:0;}
@@ -402,7 +409,7 @@ body {font-family:'Noto Sans SC','PingFang SC','Hiragino Sans GB',-apple-system,
  #content h3 .proj-date{font-family:Arial,sans-serif;font-size:7.8pt;color:#76818a;}
  #content p{font-size:10pt;line-height:1.45;margin:0 0 5pt;color:#35404a;}
  #content ul{padding-left:0;margin:0 0 6pt;}
- #content li{font-size:10pt;line-height:1.43;margin:0 0 3pt;padding-left:10pt;color:#35404a;}
+ #content li{font-size:10pt;line-height:1.5;margin:0 0 3pt;padding-left:10pt;color:#35404a;}
  #content li::before{color:#bdc8d0;}
  #content strong{font-weight:600;color:#25313b;}
  #content .intent-list{margin:0;}
@@ -431,9 +438,27 @@ body {font-family:'Noto Sans SC','PingFang SC','Hiragino Sans GB',-apple-system,
  #content .achievements td strong{white-space:nowrap;}
  #content thead{display:table-header-group;}
  #content a{color:inherit;text-decoration:none;}
+ /* Curated pagination: projects remain intact, architecture reads as one matrix. */
+ .project-group:has(#case-agentic),.project-group:has(#case-arto){break-before:page;}
+ .project-group:has(#case-agentic)::before,.project-group:has(#case-arto)::before{display:block;font-size:7.5pt;line-height:1.4;letter-spacing:.04em;color:#82909b;padding-bottom:5pt;margin-bottom:4pt;border-bottom:1px solid #e1e7eb;}
+ .project-group:has(#case-agentic)::before{content:"职业经历 · 贝壳找房／XYZ创新中心";}
+ .project-group:has(#case-arto)::before{content:"职业经历 · 悉见智能／创始人兼CEO";}
+ #content .project-group:has(:is(#case-agentic,#case-artown,#case-seek,#case-glasses)) li{margin-bottom:5pt;}
+ #content .project-group:has(:is(#case-agentic,#case-artown,#case-seek,#case-glasses)) h3{margin-top:10pt;margin-bottom:6pt;}
+ .part-system{break-before:page;margin-top:0;}
+ .part-system .part-heading{margin-bottom:12pt;}
+ .capability-group{display:grid;grid-template-columns:76pt minmax(0,1fr);gap:14pt;border-top:1px solid #dce3e7;padding:11pt 0 10pt;}
+ #content .capability-group h2.level-heading,#content .layer-navigation + .capability-group h2.level-heading{display:block;margin:0;padding:0;border:0;background:none;line-height:1.4;}
+ .capability-group .level-tag{display:block;width:auto;height:auto;border:0;background:none;padding:0;margin:0 0 5pt;color:#8297a7;font-family:Arial,sans-serif;font-size:8pt;line-height:1.2;}
+ .capability-group .level-copy{display:block;}
+ .capability-group .level-name{display:block;font-size:10.6pt;line-height:1.4;}
+ .capability-group .level-subtitle{display:block;font-size:8.4pt;line-height:1.6;margin-top:5pt;color:#78858d;}
+ #content .capability-group ul{margin:0;}
+ #content .capability-group li{font-size:10pt;line-height:1.5;margin-bottom:4pt;}
+ #content .capability-group li:last-child{margin-bottom:0;}
 }
 </style></head><body><div class="page">
-<header id="hero"><h1>刘怀洋｜Wyon Liu</h1><p class="tagline">AI创新业务负责人｜前沿技术驱动产品型创始人</p><p class="contact">138-1182-0678 · <a href="mailto:wyonliu@gmail.com">wyonliu@gmail.com</a> · 微信：wyonwyon<br>北京／上海／香港／海外 · 北京海淀户籍 · 朝阳凤凰人才 · 香港高才</p></header>
+<header id="hero"><a class="download-pdf" href="resume.pdf?v=20260922b" download="刘怀洋_主简历.pdf" aria-label="下载刘怀洋简历PDF"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2v10m-4-4 4 4 4-4M3 13v4h14v-4"/></svg><span>下载PDF</span></a><h1>刘怀洋｜Wyon Liu</h1><p class="tagline">AI创新业务负责人｜前沿技术驱动产品型创始人</p><p class="contact">138-1182-0678 · <a href="mailto:wyonliu@gmail.com">wyonliu@gmail.com</a> · 微信：wyonwyon<br>北京／上海／香港／海外 · 北京海淀户籍 · 朝阳凤凰人才 · 香港高才</p></header>
 <nav class="navigation" aria-label="简历章节"><a href="#intent">求职意向</a><a href="#profile">个人概览</a><a href="#achievements">核心成就</a><a href="#record">职业经历</a><a href="#education">教育背景</a><a href="#system">能力架构</a></nav>
 <main id="content"><section class="cv-part part-intent" aria-labelledby="intent"><header class="part-heading"><span class="part-number" aria-hidden="true">01</span><div class="part-titles"><p class="part-kicker">Interest & Insight</p><h1 id="intent">求职意向</h1></div></header><div class="part-body">
 <ul class="intent-list">
