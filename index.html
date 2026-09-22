@@ -1,13 +1,7 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wyon Liu · CV</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-  <style>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="刘怀洋，北大计算机本硕、技术型创始人。面向大厂、头部模型与游戏公司的独立创新，探索生活智能体、AI社交游戏平台与智能硬件。">
+<title>刘怀洋｜Wyon Liu · CV</title><style>
     /* ── Reset ─────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { font-size: 16px; }
@@ -270,62 +264,398 @@
       li, tr { break-inside: avoid; }
       a { color: inherit !important; text-decoration: none !important; border: none !important; }
     }
-  </style>
-</head>
-<body>
-  <div class="page">
-    <header id="hero"><div class="loading"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></header>
-    <main id="content"></main>
-  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/marked@9/marked.min.js"></script>
-  <script>
-    marked.setOptions({ breaks: false, gfm: true });
-
-    fetch('cv.md?' + Date.now())
-      .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
-      .then(md => {
-        const lines = md.split('\n');
-
-        // Split header block (before first ---) from body
-        const hrIdx = lines.findIndex(l => l.trim() === '---');
-        const header = lines.slice(0, hrIdx > -1 ? hrIdx : 8);
-        const body   = lines.slice(hrIdx > -1 ? hrIdx + 1 : 8).join('\n');
-
-        // Parse hero fields
-        const name    = (header.find(l => l.startsWith('# ')) || '').slice(2).trim();
-        const tagline = (header.find(l => l.startsWith('**')) || '').replace(/\*\*/g, '').trim();
-        const contact = header
-          .filter(l => l.trim() && !l.startsWith('#') && !l.startsWith('**') && !l.startsWith('-'))
-          .join('<br>')
-          .replace(/([\w.+%-]+@[\w.-]+\.\w+)/g, '<a href="mailto:$1">$1</a>');
-
-        document.querySelector('title').textContent = name + ' · CV';
-        document.getElementById('hero').innerHTML = `
-          <h1>${name}</h1>
-          ${tagline ? `<p class="tagline">${tagline}</p>` : ''}
-          ${contact ? `<p class="contact">${contact}</p>` : ''}
-        `;
-
-        // Render body markdown
-        document.getElementById('content').innerHTML = marked.parse(body);
-
-        // Post-process: split "Role | Date" in h2 and h3
-        document.querySelectorAll('#content h2, #content h3').forEach(el => {
-          const txt = el.textContent;
-          const sep = txt.lastIndexOf(' | ');
-          if (sep === -1) return;
-          const role = txt.slice(0, sep);
-          const date = txt.slice(sep + 3);
-          const isH2 = el.tagName === 'H2';
-          el.innerHTML = isH2
-            ? `<span class="role">${role}</span><span class="date">${date}</span>`
-            : `<span class="proj-title">${role}</span><span class="proj-date">${date}</span>`;
-        });
-      })
-      .catch(e => {
-        document.getElementById('hero').innerHTML = `<p style="color:#e00;font-size:.8rem">cv.md 加载失败：${e.message}</p>`;
-      });
-  </script>
-</body>
-</html>
+/* Preserve the original monochrome, single-column CV design. */
+body {font-family:'Noto Sans SC','PingFang SC','Hiragino Sans GB',-apple-system,sans-serif;}
+.page {max-width:860px;padding:2.8rem 2.5rem 4rem;}
+#hero h1 {font-size:1.85rem;font-weight:500;line-height:1.35;}
+#hero .tagline {font-size:.9rem;color:#333;text-transform:none;letter-spacing:0;font-weight:600;margin:.5rem 0;}
+#hero .contact {color:#777;font-size:.78rem;}
+#hero .contact a {color:#666;}
+#hero {padding-bottom:1.1rem;}
+.navigation {display:flex;gap:.5rem 1.3rem;flex-wrap:wrap;padding:.85rem 0 .1rem;font-size:.74rem;}
+.navigation a {color:#555;font-weight:600;text-decoration:none;line-height:1.8;}
+.navigation a:hover,.navigation a:focus-visible {color:#111;text-decoration:underline;text-underline-offset:4px;}
+.layer-navigation {display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border-top:1px solid #eee;margin-top:.55rem;padding-top:.6rem;gap:.35rem .5rem;font-size:.69rem;}
+.layer-navigation a {font-weight:500;white-space:nowrap;}
+.layer-navigation b {font-weight:750;color:#222;margin-right:.28rem;}
+#content h1 {color:#777;font-size:.65rem;margin:2rem 0 1rem;padding-top:1.4rem;}
+#content h1:first-child {margin-top:.35rem;padding-top:.85rem;}
+#content h2 {font-size:1.08rem;margin:1.7rem 0 .55rem;line-height:1.65;}
+#content h3 {font-size:.9rem;line-height:1.6;}
+#content h2 .date,#content h3 .proj-date {color:#777;}
+#content p {font-size:.9rem;line-height:1.8;margin-bottom:.7rem;}
+#content li {font-size:.88rem;line-height:1.8;margin-bottom:.45rem;}
+#content table {font-size:.85rem;}
+#content td {padding:.6rem .8rem .6rem 0;line-height:1.8;border-color:#eee;}
+#content td:first-child {color:#666;padding-right:1.2rem;}
+#content .highlights td {padding-top:.55rem;padding-bottom:.55rem;}
+#content .achievements thead {display:table-header-group;}
+#content .achievements th {text-align:left;color:#777;font-size:.7rem;font-weight:500;padding:.3rem .8rem .5rem 0;border-bottom:1px solid #d9d9d9;}
+#content .achievements td {padding-top:.55rem;padding-bottom:.55rem;vertical-align:middle;}
+#content .achievements td:first-child {width:122px;color:#111;font-size:.92rem;font-variant-numeric:tabular-nums;letter-spacing:-.015em;padding-right:1rem;}
+#content .achievements td:first-child strong {font-weight:700;}
+#content .achievements td:nth-child(2) {width:135px;font-size:.77rem;padding-right:1rem;}
+#content .achievements td:last-child {font-size:.81rem;line-height:1.7;}
+#content a {color:#333;text-underline-offset:3px;overflow-wrap:anywhere;}
+#content .case-link {text-decoration:none;font-weight:600;white-space:nowrap;}
+#content .case-icon {display:inline-block;width:.72rem;height:.72rem;margin-left:.35rem;vertical-align:-.09rem;fill:none;stroke:#89928f;stroke-width:1.25;stroke-linecap:round;stroke-linejoin:round;}
+#content .case-link:hover,#content .case-link:focus-visible {text-decoration:underline;}
+#content h1,#content h2,#content h3 {scroll-margin-top:1rem;}
+/* Editorial hierarchy: silver mist, fading rules, and quiet typographic contrast. */
+.cv-part {margin-top:3rem;}
+.cv-part:first-child {margin-top:1.7rem;}
+.part-intent + .part-profile {margin-top:2rem;}
+.part-intent .part-heading {padding-top:.58rem;padding-bottom:.58rem;}
+.part-heading {position:relative;display:grid;grid-template-columns:2.55rem 1fr;align-items:center;gap:.8rem;margin:0 -.7rem 1.05rem;padding:.58rem .7rem;border:0;background:linear-gradient(100deg,rgba(225,231,236,.65) 0%,rgba(239,242,245,.54) 37%,rgba(249,250,251,.22) 72%,rgba(255,255,255,0) 100%);}
+.part-heading::before {content:'';position:absolute;top:0;left:0;width:100%;height:1px;background:linear-gradient(90deg,#778995 0%,#c7d0d6 17%,#e9edef 58%,transparent 100%);}
+.part-heading::after {content:'';position:absolute;bottom:0;left:0;width:100%;height:1px;background:linear-gradient(90deg,rgba(167,180,189,.32),rgba(227,232,235,.25) 48%,transparent 85%);}
+.part-number {font-family:Georgia,'Times New Roman',serif;font-size:2.25rem;font-weight:400;line-height:1;color:#8c9aa5;letter-spacing:-.055em;font-variant-numeric:lining-nums;}
+#content .part-kicker {font-size:.54rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;line-height:1.3;color:#71808c;margin:0 0 .15rem;}
+#content .part-heading h1 {display:block;border:0;padding:0;margin:0;font-size:1.08rem;font-weight:600;line-height:1.25;letter-spacing:.025em;text-transform:none;color:#202a32;scroll-margin-top:2rem;}
+.part-titles {min-width:0;}
+#content .part-body > h2,#content .capability-group > h2 {padding:.5rem .8rem;border-left:2px solid #a8b5bf;background:linear-gradient(90deg,rgba(230,235,239,.64) 0%,rgba(243,245,247,.42) 48%,rgba(255,255,255,0) 90%);}
+#content .part-body > h2:first-child {margin-top:0;}
+#content .intent-list {padding:0;margin:.6rem 0 1.15rem;}
+#content .intent-list li {padding-left:0;margin-bottom:.55rem;font-size:.86rem;line-height:1.8;}
+#content .intent-list li::before {display:none;}
+#content .intent-list li > strong:first-child {color:#26343e;}
+#content .credential-summary {border-left:2px solid #c8c8be;padding-left:.9rem;margin:1.1rem 0 1.5rem;font-size:.85rem;line-height:1.8;color:#62645f;}
+#content .part-record .part-body > h2 {border-top:0;padding:.55rem .8rem;margin-top:2.45rem;font-size:1.06rem;}
+#content .part-record .part-body > h2:first-child {border-top:0;padding:.55rem .8rem;margin-top:0;}
+#content .part-system .layer-navigation {margin:0 0 1.7rem;padding:.55rem 0 .8rem;border-top:0;border-bottom:1px solid #e8e8e3;}
+#content .part-system .layer-navigation a {text-decoration:none;color:#606762;}
+#content .part-system .layer-navigation b {color:#26333e;}
+#content h2.level-heading {display:flex;justify-content:flex-start;align-items:center;gap:.85rem;margin:2.25rem 0 .75rem;padding:.55rem .8rem;border-top:0;}
+#content .layer-navigation + h2.level-heading,#content .layer-navigation + .capability-group h2.level-heading {border-top:0;padding:.55rem .8rem;margin-top:0;}
+.level-tag {flex:0 0 2.15rem;width:2.15rem;height:2.15rem;display:flex;align-items:center;justify-content:center;font-size:.69rem;font-weight:600;letter-spacing:.04em;color:#536779;border:0;border-right:1px solid #cbd4db;background:none;}
+.level-copy {display:flex;align-items:baseline;gap:.85rem;min-width:0;flex-wrap:wrap;}
+.level-name {font-size:.97rem;color:#202a32;font-weight:600;}
+.level-subtitle {font-size:.84rem;color:#69716e;font-weight:400;}
+.part-heading:has(h1:target)::before {background:linear-gradient(90deg,#526978 0%,#b9c6cf 22%,#e9edef 58%,transparent 100%);}
+@media(max-width:600px){
+ .page{padding:1.8rem 1.2rem 3rem;}
+ #hero h1{font-size:1.55rem;}
+ #hero .tagline{font-size:.82rem;}
+ #hero .contact{font-size:.72rem;overflow-wrap:anywhere;}
+ .navigation{gap:.55rem 1rem;font-size:.71rem;}
+ .layer-navigation{grid-template-columns:repeat(3,minmax(0,1fr));gap:.35rem .8rem;font-size:.71rem;}
+ #content h2{gap:.2rem .7rem;}
+ #content h2 .role,#content h3 .proj-title{flex-basis:100%;}
+ #content p,#content li{font-size:.87rem;}
+ #content table{font-size:.81rem;}
+ #content td:first-child{white-space:nowrap;min-width:0;padding-right:.65rem;}
+ #content .education-table td:last-child{white-space:nowrap;}
+ #content td{padding-right:.15rem;overflow-wrap:anywhere;}
+ #content .achievements,#content .achievements tbody{display:block;width:100%;}
+ #content .achievements thead{display:none;}
+ #content .achievements tr{display:grid;grid-template-columns:1fr auto;gap:.15rem .7rem;padding:.65rem 0;border-bottom:1px solid #eee;}
+ #content .achievements tr:last-child{border-bottom:none;}
+ #content .achievements td{display:block;border:none;padding:0;width:auto;min-width:0;}
+ #content .achievements td:first-child{width:auto;padding:0;font-size:.92rem;}
+ #content .achievements td:nth-child(2){width:auto;padding:0;font-size:.74rem;align-self:center;}
+ #content .achievements td:last-child{grid-column:1/-1;font-size:.82rem;white-space:normal;}
+ .cv-part{margin-top:3.1rem;}
+ .cv-part:first-child{margin-top:1.55rem;}
+ .part-intent + .part-profile{margin-top:2.35rem;}
+ .part-heading{grid-template-columns:2.1rem 1fr;gap:.65rem;margin:0 -.25rem 1rem;padding:.6rem .55rem;}
+ .part-number{font-size:1.95rem;}
+ #content .part-heading h1{font-size:1rem;line-height:1.25;letter-spacing:.015em;}
+ #content .part-kicker{font-size:.5rem;letter-spacing:.11em;line-height:1.25;}
+ #content .intent-list li{font-size:.84rem;line-height:1.8;}
+ #content .credential-summary{font-size:.83rem;padding-left:.75rem;}
+ #content .part-record .part-body > h2{font-size:1rem;margin-top:2.1rem;padding:.55rem .65rem;}
+ #content .part-body > h2{padding:.5rem .65rem;}
+ #content h2.level-heading{gap:.7rem;margin-top:2rem;padding:.55rem .65rem;}
+ .level-copy{display:flex;flex-direction:column;gap:.1rem;}
+ .level-name{font-size:.93rem;}
+ .level-subtitle{font-size:.8rem;line-height:1.5;}
+}
+/* A4 print edition prioritizes reading comfort and intact content. */
+@page {
+ size:A4;
+ margin:12mm 14mm 15mm;
+ @bottom-left {content:"刘怀洋 · AI创新业务负责人";font-family:'Hiragino Sans GB',sans-serif;font-size:7.5pt;color:#7a858e;}
+ @bottom-right {content:counter(page) " / " counter(pages);font-family:Arial,sans-serif;font-size:7.5pt;color:#7a858e;}
+}
+@media print{
+ html{font-size:13.3333px;}
+ body{font-family:'Hiragino Sans GB','PingFang SC','Microsoft YaHei',sans-serif;color:#35404a;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+ .page{max-width:none;width:100%;padding:0;margin:0;}
+ .navigation{display:none!important;}
+ #hero{padding:0 0 6pt;border-bottom:1px solid #d9dfe3;}
+ #hero h1{font-family:'Hiragino Sans GB',Arial,sans-serif;font-size:18pt;font-weight:500;line-height:1.3;margin:0 0 5pt;}
+ #hero .tagline{font-size:9.6pt;font-weight:500;margin:0 0 4pt;}
+ #hero .contact{font-size:8pt;line-height:1.55;color:#75808a;}
+ #hero .contact a{color:inherit;border:0;}
+ .cv-part,.cv-part:first-child{margin-top:8pt;}
+ .part-intent + .part-profile{margin-top:8pt;}
+ .part-heading,.part-intent .part-heading{grid-template-columns:22pt 1fr;gap:8pt;margin:0 0 6pt;padding:3pt 7pt;break-inside:avoid;break-after:avoid;background:linear-gradient(90deg,#eff3f5,transparent 85%);}
+ .part-number{font-size:20pt;color:#899ba7;}
+ #content .part-kicker{font-family:Arial,sans-serif;font-size:5.8pt;line-height:1.3;letter-spacing:.12em;margin:0 0 2pt;}
+ #content .part-heading h1{font-size:11.3pt;font-weight:600;line-height:1.3;letter-spacing:.015em;margin:0;padding:0;}
+ #content h2,#content .part-record .part-body > h2{font-size:10.8pt;line-height:1.5;margin:9pt 0 5pt;padding:3pt 6pt;gap:5pt;}
+ #content .part-record .part-body > h2:first-child{margin-top:0;padding:4pt 6pt;}
+ #content h2 .role{flex-basis:auto;}
+ #content h2 .date{font-family:Arial,sans-serif;font-size:8pt;color:#76818a;}
+ #content h3{font-size:10.2pt;line-height:1.45;margin:8pt 0 3pt;gap:5pt;}
+ #content h3 .proj-date{font-family:Arial,sans-serif;font-size:7.8pt;color:#76818a;}
+ #content p{font-size:10pt;line-height:1.45;margin:0 0 5pt;color:#35404a;}
+ #content ul{padding-left:0;margin:0 0 6pt;}
+ #content li{font-size:10pt;line-height:1.43;margin:0 0 3pt;padding-left:10pt;color:#35404a;}
+ #content li::before{color:#bdc8d0;}
+ #content strong{font-weight:600;color:#25313b;}
+ #content .intent-list{margin:0;}
+ #content .intent-list li{font-size:9.6pt;line-height:1.5;margin:0 0 2pt;padding:0;}
+ #content table{font-size:9.4pt;line-height:1.5;margin:0 0 7pt;width:100%;}
+ #content table td,#content .highlights td,#content .achievements td{padding:3pt 6pt 3pt 0;line-height:1.4;vertical-align:top;}
+ #content table td:first-child{padding-right:9pt;}
+ #content th,#content .achievements th{font-size:7.8pt;line-height:1.4;font-weight:500;color:#75808a;text-align:left;padding:3pt 5pt 4pt 0;}
+ #content .achievements td:first-child{width:69pt;font-size:9.7pt;padding-right:7pt;}
+ #content .achievements td:nth-child(2){width:72pt;font-size:8.7pt;padding-right:7pt;}
+ #content .achievements td:last-child{font-size:9.3pt;line-height:1.4;}
+ #content .case-icon{width:6.5pt;height:6.5pt;margin-left:3pt;stroke:#8e9ba4;}
+ #content .highlights{break-inside:avoid;}
+ #content .highlights td:first-child{width:88pt;font-size:9pt;}
+ #content h2.level-heading,#content .layer-navigation + .capability-group h2.level-heading{margin:9pt 0 5pt;padding:3pt 6pt;gap:8pt;}
+ .capability-group,.project-group{break-inside:avoid;}
+ .part-education{break-inside:avoid;}
+ .level-tag{flex:0 0 20pt;width:20pt;height:22pt;font-size:7.5pt;}
+ .level-copy{display:flex;flex-direction:row;align-items:baseline;gap:9pt;}
+ .level-name{font-size:10.6pt;}
+ .level-subtitle{font-size:9.2pt;line-height:1.4;}
+ #content h1,#content h2,#content h3{break-after:avoid;break-inside:avoid;}
+ #content li,#content tr{break-inside:avoid;}
+ #content p{orphans:2;widows:2;}
+ #content .achievements{break-inside:auto;}
+ #content .achievements td strong{white-space:nowrap;}
+ #content thead{display:table-header-group;}
+ #content a{color:inherit;text-decoration:none;}
+}
+</style></head><body><div class="page">
+<header id="hero"><h1>刘怀洋｜Wyon Liu</h1><p class="tagline">AI创新业务负责人｜前沿技术驱动产品型创始人</p><p class="contact">138-1182-0678 · <a href="mailto:wyonliu@gmail.com">wyonliu@gmail.com</a> · 微信：wyonwyon<br>北京／上海／香港／海外 · 北京海淀户籍 · 朝阳凤凰人才 · 香港高才</p></header>
+<nav class="navigation" aria-label="简历章节"><a href="#intent">求职意向</a><a href="#profile">个人概览</a><a href="#achievements">核心成就</a><a href="#record">职业经历</a><a href="#education">教育背景</a><a href="#system">能力架构</a></nav>
+<main id="content"><section class="cv-part part-intent" aria-labelledby="intent"><header class="part-heading"><span class="part-number" aria-hidden="true">01</span><div class="part-titles"><p class="part-kicker">Interest & Insight</p><h1 id="intent">求职意向</h1></div></header><div class="part-body">
+<ul class="intent-list">
+<li><strong>意向岗位</strong>：创新BU一号位／创业项目CEO／产研联创</li>
+<li><strong>兴趣方向</strong>：RSI／智能体网络／世界模型／空间智能／MR／AI游戏／AI场景社交</li>
+<li><strong>产品方向</strong>：生活智能体与A2A服务、AI原生游戏社交平台、MR沉浸式社交开放世界、AI智能体硬件</li>
+<li><strong>产品内核</strong>：人本模型×世界模型，理解人的情绪、连接真实关系，支持虚实世界的探索、创造与分享</li>
+</ul></div></section><section class="cv-part part-profile" aria-labelledby="profile"><header class="part-heading"><span class="part-number" aria-hidden="true">02</span><div class="part-titles"><p class="part-kicker">Profile</p><h1 id="profile">个人概览</h1></div></header><div class="part-body">
+<p><strong>世界模型×智能体引擎×RSI</strong>：带队打通Sida／Mira空间重建、生成编辑与混合渲染，Artown实现<strong>数十个自主AI角色</strong>的记忆、行为与实时交互。当前主导Ome365引擎与进化架构，分离候选改进与独立评测，研究模型、Skill及编排策略的递归优化。</p>
+<p><strong>CV×CG双向根基</strong>：北大计算机本硕，逆向感知与正向生成双方向。手写游戏／渲染引擎，GPU＋CPU异构并行将关键算法提速<strong>数万倍</strong>，发表国际顶会论文；近16年贯通底层算法、平台架构、模型训练与软硬件产品。</p>
+<p><strong>规模化产品与ToC创新</strong>：MiPush<strong>亿级长连接</strong>、Arto<strong>5万+开发者</strong>、Artown支持<strong>10万+用户同时在线</strong>，多款AI眼镜自主量产。以Seek探索社交、Artown多角色世界和C37生成式内容为实践基础，推进LiveLiva生活智能体、A2A真人网络与AI共创世界设计。</p>
+<p><strong>创业经营与内部创新</strong>：悉见创始人兼CEO，8年承担战略、融资、产研、客户与现金流全责，实现<strong>近亿元融资、百人团队、数千万级收入</strong>，核心技术与团队并入上市公司。此后任贝壳XYZ创新中心负责人、千丁智能CTO，管理<strong>200+产研及AI创新团队</strong>。</p>
+<h2 id="achievements">核心成就｜Achievements</h2>
+<table class="achievements">
+<thead>
+<tr>
+<th>量化成果</th>
+<th>成果领域</th>
+<th>关键突破与落地</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>10万+用户</strong></td>
+<td><a class="case-link" href="#case-artown" aria-label="查看同时在线对应经历">同时在线<svg class="case-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m6.5 9.5 3-3M5.5 10.5l-1 1a2.12 2.12 0 0 1-3-3l3-3a2.12 2.12 0 0 1 3 0m1-1 1-1a2.12 2.12 0 0 1 3 3l-3 3a2.12 2.12 0 0 1-3 0"/></svg></a></td>
+<td>Artown空间多智能体系统，<strong>数十个自主AI角色</strong>；空间重建、长短期记忆、现场AR与远程VR互通</td>
+</tr>
+<tr>
+<td><strong>100万+人</strong></td>
+<td><a class="case-link" href="#case-seek" aria-label="查看并发MMO对应经历">并发MMO<svg class="case-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m6.5 9.5 3-3M5.5 10.5l-1 1a2.12 2.12 0 0 1-3-3l3-3a2.12 2.12 0 0 1 3 0m1-1 1-1a2.12 2.12 0 0 1 3 3l-3 3a2.12 2.12 0 0 1-3 0"/></svg></a></td>
+<td>MallRush线上线下同步交互与游戏化AR营销，服务大悦城、万象城、天河城、万达、绿地等</td>
+</tr>
+<tr>
+<td><strong>多款量产</strong></td>
+<td><a class="case-link" href="#case-glasses" aria-label="查看AI／AR眼镜对应经历">AI／AR眼镜<svg class="case-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m6.5 9.5 3-3M5.5 10.5l-1 1a2.12 2.12 0 0 1-3-3l3-3a2.12 2.12 0 0 1 3 0m1-1 1-1a2.12 2.12 0 0 1 3 3l-3 3a2.12 2.12 0 0 1-3 0"/></svg></a></td>
+<td>X1 Pro、XMAN贯通芯片、光学、算法与量产交付，获CES AR眼镜之星</td>
+</tr>
+<tr>
+<td><strong>数千万级</strong></td>
+<td><a class="case-link" href="#case-xijian" aria-label="查看创业公司收入对应经历">创业公司收入<svg class="case-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m6.5 9.5 3-3M5.5 10.5l-1 1a2.12 2.12 0 0 1-3-3l3-3a2.12 2.12 0 0 1 3 0m1-1 1-1a2.12 2.12 0 0 1 3 3l-3 3a2.12 2.12 0 0 1-3 0"/></svg></a></td>
+<td>软硬件产品、开发者平台及ToB／ToC商业化；<strong>融资近亿元、组建百人团队</strong>，核心技术与团队并入上市公司</td>
+</tr>
+<tr>
+<td><strong>10亿+㎡</strong></td>
+<td><a class="case-link" href="#case-arto" aria-label="查看空间地图对应经历">空间地图<svg class="case-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m6.5 9.5 3-3M5.5 10.5l-1 1a2.12 2.12 0 0 1-3-3l3-3a2.12 2.12 0 0 1 3 0m1-1 1-1a2.12 2.12 0 0 1 3 3l-3 3a2.12 2.12 0 0 1-3 0"/></svg></a></td>
+<td>Arto打通消费级采集—重建—定位—在线推理，积累众包空间地图，服务<strong>100万+AR用户</strong></td>
+</tr>
+<tr>
+<td><strong>5万+</strong></td>
+<td><a class="case-link" href="#case-arto" aria-label="查看开发者平台对应经历">开发者平台<svg class="case-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m6.5 9.5 3-3M5.5 10.5l-1 1a2.12 2.12 0 0 1-3-3l3-3a2.12 2.12 0 0 1 3 0m1-1 1-1a2.12 2.12 0 0 1 3 3l-3 3a2.12 2.12 0 0 1-3 0"/></svg></a></td>
+<td>Arto将感知、重建与定位封装为开发者服务，覆盖中国、美国、日本、韩国等市场</td>
+</tr>
+<tr>
+<td><strong>100万+小时</strong></td>
+<td><a class="case-link" href="#case-arto" aria-label="查看视频训练数据对应经历">视频训练数据<svg class="case-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m6.5 9.5 3-3M5.5 10.5l-1 1a2.12 2.12 0 0 1-3-3l3-3a2.12 2.12 0 0 1 3 0m1-1 1-1a2.12 2.12 0 0 1 3 3l-3 3a2.12 2.12 0 0 1-3 0"/></svg></a></td>
+<td>真实场景采集接入空间算法训练，形成视频数据与<strong>10亿+㎡空间地图</strong>两类资产</td>
+</tr>
+<tr>
+<td><strong>亿级</strong></td>
+<td><a class="case-link" href="#case-xiaomi" aria-label="查看长连接服务对应经历">长连接服务<svg class="case-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m6.5 9.5 3-3M5.5 10.5l-1 1a2.12 2.12 0 0 1-3-3l3-3a2.12 2.12 0 0 1 3 0m1-1 1-1a2.12 2.12 0 0 1 3 3l-3 3a2.12 2.12 0 0 1-3 0"/></svg></a></td>
+<td>MiPush创始成员，从0→1建设小米集团并发量第一的平台级云产品</td>
+</tr>
+<tr>
+<td><strong>数万倍</strong></td>
+<td><a class="case-link" href="#education" aria-label="查看算法性能对应经历">算法性能<svg class="case-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m6.5 9.5 3-3M5.5 10.5l-1 1a2.12 2.12 0 0 1-3-3l3-3a2.12 2.12 0 0 1 3 0m1-1 1-1a2.12 2.12 0 0 1 3 3l-3 3a2.12 2.12 0 0 1-3 0"/></svg></a></td>
+<td>GPU＋CPU异构并行优化三维重建与渲染关键算法，发表国际顶会论文</td>
+</tr>
+<tr>
+<td><strong>500+</strong></td>
+<td><a class="case-link" href="#case-xijian" aria-label="查看全球客户对应经历">全球客户<svg class="case-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m6.5 9.5 3-3M5.5 10.5l-1 1a2.12 2.12 0 0 1-3-3l3-3a2.12 2.12 0 0 1 3 0m1-1 1-1a2.12 2.12 0 0 1 3 3l-3 3a2.12 2.12 0 0 1-3 0"/></svg></a></td>
+<td>任天堂、索尼、KDDI、Singtel、保时捷、华为、腾讯、百度等</td>
+</tr>
+<tr>
+<td><strong>10+项领先</strong></td>
+<td><a class="case-link" href="#case-arto" aria-label="查看核心技术指标对应经历">核心技术指标<svg class="case-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m6.5 9.5 3-3M5.5 10.5l-1 1a2.12 2.12 0 0 1-3-3l3-3a2.12 2.12 0 0 1 3 0m1-1 1-1a2.12 2.12 0 0 1 3 3l-3 3a2.12 2.12 0 0 1-3 0"/></svg></a></td>
+<td>空间智能核心技术指标世界领先，形成数十项核心专利及知识产权</td>
+</tr>
+<tr>
+<td><strong>数十项冠军</strong></td>
+<td><a class="case-link" href="#case-xijian" aria-label="查看技术竞赛与荣誉对应经历">技术竞赛与荣誉<svg class="case-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m6.5 9.5 3-3M5.5 10.5l-1 1a2.12 2.12 0 0 1-3-3l3-3a2.12 2.12 0 0 1 3 0m1-1 1-1a2.12 2.12 0 0 1 3 3l-3 3a2.12 2.12 0 0 1-3 0"/></svg></a></td>
+<td>全球及全国技术竞赛；国务院五部委先锋案例、国家高新技术企业、专精特新</td>
+</tr>
+</tbody></table>
+<h2>复合优势｜Competence</h2>
+<table class="highlights">
+<thead>
+<tr>
+<th>能力</th>
+<th>方法与实证</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a class="case-link" href="#case-basic" aria-label="查看A｜全栈架构对应经历">A｜全栈架构<svg class="case-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m6.5 9.5 3-3M5.5 10.5l-1 1a2.12 2.12 0 0 1-3-3l3-3a2.12 2.12 0 0 1 3 0m1-1 1-1a2.12 2.12 0 0 1 3 3l-3 3a2.12 2.12 0 0 1-3 0"/></svg></a></td>
+<td>世界状态→智能体行动→端云交互；Arto平台、Sida／Mira模型管线、AI眼镜量产，贯通数据、算法、系统与终端。</td>
+</tr>
+<tr>
+<td><a class="case-link" href="#case-seek" aria-label="查看I｜产品洞察对应经历">I｜产品洞察<svg class="case-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m6.5 9.5 3-3M5.5 10.5l-1 1a2.12 2.12 0 0 1-3-3l3-3a2.12 2.12 0 0 1 3 0m1-1 1-1a2.12 2.12 0 0 1 3 3l-3 3a2.12 2.12 0 0 1-3 0"/></svg></a></td>
+<td>AI硬件四象限识别感知入口与服务对象；TCPMF检验技术／成本与市场适配。Seek场景社交、Artown多角色交互、C37生成式体验形成产品实证。</td>
+</tr>
+<tr>
+<td><a class="case-link" href="#case-xijian" aria-label="查看T｜创业经营对应经历">T｜创业经营<svg class="case-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m6.5 9.5 3-3M5.5 10.5l-1 1a2.12 2.12 0 0 1-3-3l3-3a2.12 2.12 0 0 1 3 0m1-1 1-1a2.12 2.12 0 0 1 3 3l-3 3a2.12 2.12 0 0 1-3 0"/></svg></a></td>
+<td>技术路线、融资组队、产品商业化、客户交付与现金流全责；8年跨越创业到核心技术并入上市公司的周期，兼具独立经营与大平台内部创新经历。</td>
+</tr>
+</tbody></table></div></section><section class="cv-part part-record" aria-labelledby="record"><header class="part-heading"><span class="part-number" aria-hidden="true">03</span><div class="part-titles"><p class="part-kicker">Track Record</p><h1 id="record">职业经历</h1></div></header><div class="part-body">
+<h2><span class="role">龙湖集团·千丁智能CTO</span><span class="date">2026.04—至今</span></h2>
+<p>集团第二曲线产研一号位与AI创新负责人，管理<strong>200+产研及AI创新团队</strong>；主导<strong>世界模型、智能体引擎与组织自进化</strong>，以空间数据和任务结果驱动模型、产品及协作架构。</p>
+<div class="project-group"><h3 id="case-spatial">世界模型与空间智能</h3><ul>
+<li><strong>TeemWomo｜四层隐显融合世界模型</strong>：主导<strong>感知→几何／语义建模→物理因果推演→Agent行动与MR交互</strong>架构设计，以显式状态承载空间记忆，结合生成与推演模型组织状态更新和行动反馈。</li>
+<li><strong>RealNet｜空间状态与数据协议</strong>：设计SOAP，以统一对象主键对齐BIM、3DGS、点云、IoT、视频及行为事件，融合<strong>设计—建成—运营三态</strong>；组织采集、治理、标注与服务接口，供模型训练和Agent查询／行动调用。</li>
+<li><strong>空间智能分级</strong>：以L1—L5划分感知、认知、决策与交互能力，确定技术成熟度及投入顺序；面向集团<strong>100+商业综合体、数十万间公寓、百万户家庭</strong>的业务场景。</li>
+</ul></div>
+<div class="project-group"><h3 id="case-ome365">A4S智能体网络与自进化体系</h3><ul>
+<li><strong>Ome365｜分身与智能体引擎</strong>：主导<strong>记忆—反思—执行—养成</strong>架构，以工作对象绑定目标、负责人、权限与验收；消息／任务驱动多Agent协同和劳工调度，任务轨迹与纠正沉淀为记忆和Skill。</li>
+<li><strong>四引擎与能力网络</strong>：OmeActor承载分身，OmeFlow编排协作，<strong>OmeStore沉淀、分发Skill与劳工</strong>，OmeRank沿成果依赖回流贡献；连接个人能力生产、组织复用与结果评价。</li>
+<li><strong>RSI｜改进器与独立验证</strong>：设计<strong>执行轨迹→候选改进→独立评测→受控发布→新任务验证</strong>链路；分离提案、效果认证与业务验收，以质量、可靠性及总成本净收益筛选模型／Skill／编排策略，研究改进机制自身的递归优化。</li>
+<li><strong>TeemDeep｜垂直模型后训练</strong>：推进CPT领域适配、SFT任务训练、DPO／RLHF偏好优化及RAG／蒸馏；以组织知识、任务样本和偏好反馈构建数据链路，结合知识库×智能体平台×AI IDE，覆盖需求拆解、开发与测试。</li>
+</ul></div>
+<h2><span class="role">贝壳找房·XYZ创新中心负责人</span><span class="date">2024.10—2026.04</span></h2>
+<p>上市公司独立创新业务负责人，管理数十人产研团队，汇聚多名大厂P9级多模态算法与引擎专家；带队构建<strong>采集重建—生成编辑—混合渲染—智能体交互</strong>链路。</p>
+<div class="project-group"><h3 id="case-basic">BASIC空间智能底座</h3><ul>
+<li><strong>Sida｜采集与训练一体化</strong>：带队打通消费级采集、几何重建、多轮数据修复与<strong>数十项训练优化</strong>，形成自动化照片级3DGS生产管线，<strong>多项指标超SOTA</strong>。</li>
+<li><strong>Mira｜生成、编辑与混合渲染</strong>：自研空间生成管线与多端3DGS／Mesh引擎，贯通<strong>2D户型→三维重建→语义参数→精装资产→智能组装</strong>，实现云烘焙、一键换装与多端交互。</li>
+<li><strong>CityWomo｜城市世界建模</strong>：推进卫星、街景与第一视角视频对齐，融合重建、语义参数及城市地图，支撑跨尺度感知、定位与智能体行动。</li>
+</ul></div>
+<div class="project-group"><h3 id="case-agentic">Agentic创新产品</h3><ul>
+<li><strong>SpatialAgents｜空间智能体引擎</strong>：自然语言×空间感知×3D交互×AIGC，将用户意图映射为空间对象和可执行动作，支撑角色协作与场景生成。</li>
+<li><strong>LiveIn3D｜3D智能体社区</strong>：推进持续角色、邻里关系与高频居住服务的产品设计，以Agent连接真人社交和空间体验。</li>
+<li><strong>HomeTour｜MR交互式决策</strong>：推进看房、装修与小区沉浸体验，将智能体经纪人、设计师和房产专家的问答与方案生成嵌入空间交互。</li>
+<li><strong>DreamHome｜线下AI体验入口</strong>：规划MR沉浸体验中心，探索<strong>AI设计→空间体验→居住服务</strong>转化链路。</li>
+</ul></div>
+<h2 id="case-xijian"><span class="role">悉见智能·创始人兼CEO</span><span class="date">2016.03—2024.09</span></h2>
+<p>创办空间智能与AI交互公司，<strong>融资近亿元、百人AI×MR团队、数千万级收入</strong>，核心技术与团队并入上市公司。亲自承担战略、融资、产研、客户交付与现金流；团队汇聚谷歌、微软、腾讯、百度、Momenta等背景人才。</p>
+<div class="project-group"><h3 id="case-artown"><span class="proj-title">Artown.ai·空间多智能体小镇</span><span class="proj-date">2023—2024</span></h3><ul>
+<li><strong>空间运行架构</strong>：全场景扫描→三维风格化重建→AI剧本→多人实时交互，形成<strong>1∶1虚实映射、现场AR与远程VR互通</strong>的空间多智能体系统。</li>
+<li><strong>角色运行引擎</strong>：打通大模型调用、知识库、长短期记忆与行为调度，支撑<strong>数十个AI角色</strong>自主行动、多轮会话和实时空间交互；2023年起在真实场景部署。</li>
+<li><strong>运行与落地成果</strong>：支持<strong>10万+用户同时在线</strong>；相关项目服务故宫、大运河、颐和园、少林寺等场景，获<strong>国务院五部委先锋案例</strong>、北京市科委重点项目及政府和文旅部门推介。</li>
+</ul></div>
+<div class="project-group"><h3 id="case-seek"><span class="proj-title">Seek App与MallRush商业平台</span><span class="proj-date">2017—2023</span></h3><ul>
+<li><strong>Seek｜探索驱动的场景社交</strong>：以AR CityWalk／AI导游组织发现，智能匹配连接同行者，PUGC／AIGC承接经历创作，贯通<strong>内容发现→真人连接→共同探索→创作分享</strong>。</li>
+<li><strong>MallRush｜打通现场与线上商业互动</strong>：构建游戏化AR营销平台，实现<strong>100万+人并发MMO</strong>，服务大悦城、万象城、天河城、万达、绿地等商业场景。</li>
+<li><strong>商业成果</strong>：为企业客户交付垂直模型与多智能体协作方案，接通智能体客服、空间数据与企业知识库，取得<strong>千万级ToB收入</strong>。</li>
+</ul></div>
+<div class="project-group"><h3 id="case-glasses"><span class="proj-title">X1 Pro／XMAN系列AI眼镜</span><span class="proj-date">2016—2019</span></h3><ul>
+<li><strong>软硬件一体研发</strong>：贯通场景定义→芯片选型→光学设计→算法优化→量产管控，完成AI眼镜与AR一体机自主研发，产品落地文旅、安防、巡检与物流。</li>
+<li><strong>量产与商业成果</strong>：<strong>X1 Pro、XMAN等多款产品量产</strong>，服务京东、大金、戴姆勒等客户，获<strong>CES AR眼镜之星</strong>及公安部等资质认证。</li>
+<li><strong>产品方法</strong>：提出<strong>AI硬件四象限</strong>，以感知来源“人／环境”×服务对象“人／环境”区分产品机会，反推传感入口、计算架构与交互形态。</li>
+</ul></div>
+<div class="project-group"><h3 id="case-arto"><span class="proj-title">Arto.world·多模态空间计算平台</span><span class="proj-date">2019—2024</span></h3><ul>
+<li><strong>平台架构</strong>：深度学习流水线×多模态感知×超大规模重建×异构并行，打通<strong>消费级采集—重建—定位—在线推理自动化</strong>；全球自适应部署，将空间算法封装为开发者服务。</li>
+<li><strong>平台与数据成果</strong>：<strong>5万+开发者、10亿+㎡众包空间地图、100万+AR用户、100万+小时视频训练数据</strong>，开发者覆盖中国、美国、日本、韩国等市场。</li>
+<li><strong>技术与商业成果</strong>：<strong>10+项核心技术指标世界领先</strong>，服务KDDI、任天堂、索尼、Singtel、保时捷、华为、腾讯、百度等客户。</li>
+</ul></div>
+<div class="project-group"><h3 id="case-c37"><span class="proj-title">C37.ai·3D AIGC工作室</span><span class="proj-date">2022—2024</span></h3><ul>
+<li><strong>生成式美术工程</strong>：多模态模型微调×视频时空压缩×DiT×3D AIGC，贯通生成式内容生产与城市实景呈现。</li>
+<li><strong>商业交付</strong>：完成城市街道级3D AIGC＋MR裸眼全息产品“<strong>保时捷·奇幻梦之旅</strong>”，落地<strong>上海外滩、广州塔</strong>。</li>
+</ul></div>
+<h2><span class="role">送姜科技·联合创始人兼CTO</span><span class="date">2015.05—2015.12</span></h2>
+<p>清华xLab孵化创业项目，获天使轮、Pre-A轮及数千万元A轮融资。负责校园生活服务产品研发，产品落地多城市高校。</p>
+<h2 id="case-xiaomi"><span class="role">小米科技·云架构师</span><span class="date">2013.04—2015.05</span></h2>
+<ul>
+<li><strong>MiPush｜亿级连接与消息推送</strong>：创始成员，从0→1建设支撑<strong>亿级长连接</strong>的平台级云产品，成为<strong>小米集团并发量第一</strong>的消息平台。</li>
+<li><strong>Mampa｜异步消息框架</strong>：独立研发并开源高并发异步消息处理框架，应用于<strong>米推、米聊、米云、米信</strong>四类业务。</li>
+<li><strong>JerryMice｜集群自动化部署</strong>：改造Redis、Kafka、ZooKeeper等组件，编写海量在线集群管理与自动化部署平台。</li>
+</ul>
+<h2 id="case-netease"><span class="role">网易有道·产研负责人</span><span class="date">2010.10—2013.04</span></h2>
+<ul>
+<li><strong>网易八方</strong>：负责早期LBS图片社交产品的系统架构与技术算法，基于真实位置和图像内容组织社交发现。</li>
+<li><strong>个性化推荐</strong>：结合协同过滤、图结构、深度学习与实时会话多路融合，以行为、偏好和会话上下文驱动信息分发。</li>
+<li><strong>图像与视觉产品</strong>：一周完成20+种图像滤镜算法并开源，成为多款App算法来源；研发“拍图识菜”，以视觉识别支持营养与卡路里计算。</li>
+<li><strong>绩效Top10%</strong>。</li>
+</ul></div></section><section class="cv-part part-education" aria-labelledby="education"><header class="part-heading"><span class="part-number" aria-hidden="true">04</span><div class="part-titles"><p class="part-kicker">Education & Foundations</p><h1 id="education">教育背景</h1></div></header><div class="part-body">
+<h2>北京大学计算机本硕</h2>
+<table class="education-table">
+<thead>
+<tr>
+<th>学位</th>
+<th>学校与方向</th>
+<th>时间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>硕士·保送</strong></td>
+<td>北京大学｜计算机视觉、三维重建与图形学</td>
+<td>2008—2011</td>
+</tr>
+<tr>
+<td><strong>学士·统招</strong></td>
+<td>北京大学｜计算机科学与技术</td>
+<td>2004—2008</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>底层算法与并行计算</strong>：早期开展GPU＋CPU异构并行研发，优化三维重建与渲染关键算法，性能提升数万倍，发表国际顶会论文。</li>
+<li><strong>引擎与工程</strong>：本科期间以OpenGL编写游戏渲染引擎，撰写《开源游戏编程指南引擎篇》，积累数千名高阶读者。</li>
+<li><strong>科研与交流</strong>：参与多项国家科学基金项目，曾赴斯坦福大学、香港科技大学、特拉维夫大学研学交流；硕士后选择进入产业。</li>
+</ul></div></section><section class="cv-part part-system" aria-labelledby="system"><header class="part-heading"><span class="part-number" aria-hidden="true">05</span><div class="part-titles"><p class="part-kicker">Architecture & Evidence</p><h1 id="system">能力架构</h1></div></header><div class="part-body"><nav class="navigation layer-navigation" aria-label="L0至L5能力索引"><a href="#foundation"><b>L0</b>底层素养</a><a href="#platform"><b>L1</b>平台架构</a><a href="#model"><b>L2</b>模型工程</a><a href="#enterprise"><b>L3</b>智能进化</a><a href="#interaction"><b>L4</b>人机交互</a><a href="#life"><b>L5</b>生活智能</a></nav>
+<div class="capability-group"><h2 id="foundation" class="level-heading"><span class="level-tag">L0</span><span class="level-copy"><span class="level-name">底层素养</span><span class="level-subtitle">科班根基与经营闭环</span></span></h2><ul>
+<li><strong>一线工程</strong>：北大CV×CG，手写游戏／渲染引擎、独立研发Mampa，异构并行优化<strong>数万倍</strong>；技术判断深入算法、运行时与用户体验。</li>
+<li><strong>技术经营</strong>：TCPMF以技术／成本约束产品，再由市场适配检验投入。8年完成<strong>近亿融资、百人团队、数千万级收入与核心技术并入上市公司</strong>；现管理<strong>200+产研及AI创新团队</strong>，承担路线、组织与交付责任。</li>
+</ul></div>
+<div class="capability-group"><h2 id="platform" class="level-heading"><span class="level-tag">L1</span><span class="level-copy"><span class="level-name">平台架构</span><span class="level-subtitle">端云一体与空间底座</span></span></h2><ul>
+<li><strong>平台实证</strong>：MiPush<strong>亿级长连接</strong>；Arto自动化采集—重建—定位—推理，积累<strong>10亿+㎡地图、5万+开发者</strong>；X1 Pro／XMAN覆盖芯片、光学、算法与多款量产。</li>
+<li><strong>端云取舍</strong>：以实时响应约束端侧感知／渲染，以算力预算配置云端训练／生成；联合评估<strong>时延、带宽、功耗与内存</strong>，确定推理、状态同步与内容加载的边界。</li>
+<li><strong>世界状态</strong>：RealNet以对象主键、时空事件与SOAP接口对齐BIM、3DGS及运营状态；同一空间对象贯穿设计、建成与运行，支撑Agent查询和行动反馈。</li>
+</ul></div>
+<div class="capability-group"><h2 id="model" class="level-heading"><span class="level-tag">L2</span><span class="level-copy"><span class="level-name">模型工程</span><span class="level-subtitle">世界模型与后训练</span></span></h2><ul>
+<li><strong>双向生产管线</strong>：Sida消费级采集→数据修复→3DGS训练，<strong>数十项优化、多项指标超SOTA</strong>；Mira语义参数→资产组装→混合渲染，交付一键换装与多端交互。</li>
+<li><strong>表征与生成取舍</strong>：研究<strong>显式几何／语义维护持久状态，生成模型补充内容与动态</strong>的混合架构；以重访一致性约束记忆，以状态更新和动作反馈约束可控性。</li>
+<li><strong>训练与推理取舍</strong>：TeemDeep推进领域适配、任务训练与偏好优化；研究少步蒸馏，以任务质量、回归可靠性和推理成本选择路线。数据工程实证包括Arto<strong>100万+小时视频训练数据</strong>。</li>
+</ul></div>
+<div class="capability-group"><h2 id="enterprise" class="level-heading"><span class="level-tag">L3</span><span class="level-copy"><span class="level-name">智能进化</span><span class="level-subtitle">智能体引擎与RSI</span></span></h2><ul>
+<li><strong>引擎与协作</strong>：主导Ome365记忆—反思—执行—养成；OmeActor承载分身，OmeFlow编排任务，OmeStore分发Skill／劳工，OmeRank沿成果依赖回流贡献，DID连接跨企业身份。</li>
+<li><strong>递归改进机制</strong>：研究模型、Skill与编排策略的候选生成、独立评测和受控发布；<strong>RSI进一步优化改进机制本身</strong>，在新任务上检验质量、可靠性与总成本净收益。</li>
+<li><strong>结果约束</strong>：工作对象绑定目标、权限、负责人和验收；结果筛选方法，方法复用为能力，贡献回流到协作节点。既有垂直模型与多智能体方案取得<strong>千万级ToB收入</strong>。</li>
+</ul></div>
+<div class="capability-group"><h2 id="interaction" class="level-heading"><span class="level-tag">L4</span><span class="level-copy"><span class="level-name">人机交互</span><span class="level-subtitle">空间交互与持续学习</span></span></h2><ul>
+<li><strong>意图与注意力</strong>：从行为／偏好推荐到SpatialAgents空间交互，以对象、场景和用户意图组织<strong>响应角色、提醒时机与信息呈现</strong>，协调多Agent后台行动与前台体验。</li>
+<li><strong>交互学习闭环</strong>：研究“选择／纠正→行动结果→偏好样本→更新→跨任务验证”的Agent Loop；区分记忆、策略与参数学习，CL同时验证<strong>新经验迁移与旧能力保持</strong>。</li>
+<li><strong>交互实证</strong>：Artown<strong>数十个自主AI角色、10万+用户同时在线、AR／VR互通</strong>，接通长短期记忆、行为调度与空间交互；Seek场景社交与AI眼镜量产覆盖软件、空间和终端。</li>
+</ul></div>
+<div class="capability-group"><h2 id="life" class="level-heading"><span class="level-tag">L5</span><span class="level-copy"><span class="level-name">生活智能</span><span class="level-subtitle">数字生命与A2A网络</span></span></h2><ul>
+<li><strong>产品判断</strong>：LiveLiva以<strong>人本模型×世界模型×持续身份</strong>组织生活智能；共同经历同步积累个人理解、真人关系与创作资产，连接情绪陪伴、真实生活与虚实探索。</li>
+<li><strong>A2A关系机制</strong>：数字生命在授权范围内主动探路、交流意愿、协调人与服务；真人确认关键选择，共同经历沉淀关系，反馈改进后续推荐与行动。</li>
+<li><strong>共创与成长机制</strong>：用户创作、发行AI生命、故事与场景，联动为可参与的开放世界；以相处养成、能力复用和内容共创设计长期价值。<strong>Seek社交、Artown多角色运行、C37生成式交付</strong>提供产品与工程实证。</li>
+</ul></div>
+</div></section></main></div></body></html>
